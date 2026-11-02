@@ -23,7 +23,7 @@ Run from the repository root with the environment active. Each stage reads only 
 
 | Stage | Command | Equivalent without Make | Approximate time |
 |---|---|---|---|
-| Get data | `make data` | `python code/01_get_data.py` | to be measured |
+| Get data | `make data` | `python code/01_get_data.py` | about 2 min, nearly all of it the download |
 | Prepare | `make prepare` | `python code/02_prepare.py` | to be measured |
 | Features | `make features` | `python code/03_features.py` | to be measured |
 | Unsupervised | `make unsupervised` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/04_unsupervised.ipynb` | to be measured |
@@ -42,6 +42,8 @@ Run from the repository root with the environment active. Each stage reads only 
 ## Data source and licence
 
 The data are the "best of" cuts of the Watkins Marine Mammal Sound Database, downloaded from the Hugging Face mirror [`confit/wmms-parquet`](https://huggingface.co/datasets/confit/wmms-parquet) at the revision pinned in `config.yaml`. The mirror's card also points to an [archive.org copy](https://archive.org/details/watkins_202104) of the database.
+
+The card declares 16 kHz, but the stored WAV files keep their native sample rates, from 600 Hz to 166.6 kHz.
 
 Credit: "Watkins Marine Mammal Sound Database, Woods Hole Oceanographic Institution and the New Bedford Whaling Museum."
 

@@ -9,4 +9,6 @@ Everything in this folder except this file is gitignored and is rebuilt by the p
 | `interim/` | `code/01_get_data.py`, `code/02_prepare.py` | Per-cut inventory, filtered metadata and the saved split assignment |
 | `features/` | `code/03_features.py` | Cached MFCC frame sequences and clip-level statistics |
 
+`interim/inventory.csv` has one row per cut: labels, source file name, native sample rate, duration, a hash of the audio, and where to find the cut in `raw/`. The stored audio keeps its native sample rate, whatever the dataset card declares.
+
 Run `make data` or `python code/01_get_data.py` to download the audio. See the main README for the source and licence.

@@ -17,7 +17,6 @@ data:
   hf_repo_id: confit/wmms-parquet
   hf_revision: a90a38e0006991f0c6f6d4e05261949a1da7f14e
   expected_cuts: 1697
-  expected_sample_rate: 16000
 
 prepare:
   min_cuts_per_species: 20

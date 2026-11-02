@@ -18,6 +18,7 @@ Running log of AI assistance, for the paper appendix. The tool used is Claude Co
 | 2026-11-02 | `src/ecoacoustics/__init__.py`, `config.py`, `utils.py` | Load config, set all seeds from one place, set up logging | |
 | 2026-11-02 | `src/ecoacoustics/io.py`, `splits.py`, `features.py`, `models.py`, `evaluation.py`, `plotting.py` | Package module placeholders, filled in at their stages | |
 | 2026-11-02 | `tests/test_config.py`, `tests/test_utils.py` | Test config path resolution and seed reproducibility | |
+| 2026-11-02 | `code/01_get_data.py`, `src/ecoacoustics/io.py`, `tests/test_io.py` | Download the data at a pinned revision and save a per-cut inventory; test it on synthetic audio | |
 
 ## Code adapted from external sources
 
