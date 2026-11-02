@@ -1,0 +1,56 @@
+<!-- Generated with Claude Code (Anthropic): README skeleton, updated after each stage. -->
+# Spectral Shape or Temporal Structure? Species Identity in Marine Mammal Vocalizations
+
+## What this project does
+
+This project asks whether species identity in marine mammal calls is carried mainly by spectral shape or whether temporal structure adds information, by comparing a logistic regression on time-averaged MFCC statistics with a small LSTM on MFCC sequences. It also tests whether clusters found without labels recover species, using the Watkins Marine Mammal Sound Database with train, validation and test splits grouped by source recording.
+
+## Install
+
+Requires Python 3.13. From the repository root:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate        # Windows PowerShell: .venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+pip install -e .
+nbstripout --install --attributes .gitattributes
+```
+
+## What to run, in order
+
+Run from the repository root with the environment active. Each stage reads only what the previous stage saved.
+
+| Stage | Command | Equivalent without Make | Approximate time |
+|---|---|---|---|
+| Get data | `make data` | `python code/01_get_data.py` | to be measured |
+| Prepare | `make prepare` | `python code/02_prepare.py` | to be measured |
+| Features | `make features` | `python code/03_features.py` | to be measured |
+| Unsupervised | `make unsupervised` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/04_unsupervised.ipynb` | to be measured |
+| Supervised | `make supervised` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/05_supervised.ipynb` | to be measured |
+| Figures | `make figures` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/06_figures.ipynb` | to be measured |
+
+`make all` runs every stage in order, and `make analysis` runs the unsupervised and supervised stages. `make test` runs the tests and `make lint` runs ruff.
+
+## Outputs
+
+- `results/figures/`: every figure in the paper.
+- `results/tables/`: every table in the paper, as `.csv` and `.tex`.
+- `results/models/` and `results/logs/`: trained models and run logs, not tracked in git.
+- `data/`: downloaded audio and cached features, not tracked in git. See [data/README.md](data/README.md).
+
+## Data source and licence
+
+The data are the "best of" cuts of the Watkins Marine Mammal Sound Database, downloaded from the Hugging Face mirror [`confit/wmms-parquet`](https://huggingface.co/datasets/confit/wmms-parquet) at the revision pinned in `config.yaml`. The mirror's card also points to an [archive.org copy](https://archive.org/details/watkins_202104) of the database.
+
+Credit: "Watkins Marine Mammal Sound Database, Woods Hole Oceanographic Institution and the New Bedford Whaling Museum."
+
+**Licence:** free for personal or academic use only, not commercial use, and reposting is forbidden. The audio is therefore never committed to this repository; `code/01_get_data.py` downloads it instead.
+
+## Resources beyond a CPU-only cloud workspace
+
+None. The pipeline needs no GPU. The download is about 1.2 GB.
+
+## Attribution
+
+Code generated with AI assistance carries a comment at the top of each file and is logged in [AI_USAGE.md](AI_USAGE.md), along with any code adapted from external sources.

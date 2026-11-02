@@ -1,0 +1,6 @@
+# Generated with Claude Code (Anthropic): normalise line endings and strip notebook outputs on commit.
+* text=auto eol=lf
+*.png binary
+*.pdf binary
+*.ipynb filter=nbstripout
+*.ipynb diff=ipynb

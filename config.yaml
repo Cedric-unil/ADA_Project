@@ -1,0 +1,64 @@
+# Generated with Claude Code (Anthropic): single source of paths, seeds and hyperparameters.
+# All paths are relative to the repository root.
+# Hyperparameters are starting values. Tune them on the validation set only.
+
+seed: 42
+
+paths:
+  raw_dir: data/raw
+  interim_dir: data/interim
+  features_dir: data/features
+  figures_dir: results/figures
+  tables_dir: results/tables
+  models_dir: results/models
+  logs_dir: results/logs
+
+data:
+  hf_repo_id: confit/wmms-parquet
+  hf_revision: a90a38e0006991f0c6f6d4e05261949a1da7f14e
+  expected_cuts: 1697
+  expected_sample_rate: 16000
+
+prepare:
+  min_cuts_per_species: 20
+  # Stage 02 refuses to run while this is null. It never falls back to a random split.
+  grouping_key: null
+  val_fraction: 0.15
+  test_fraction: 0.15
+
+features:
+  n_mfcc: 13
+  n_fft: 512
+  hop_length: 160
+  n_mels: 40
+  fmin: 0
+  fmax: 8000
+  delta_width: 9
+
+unsupervised:
+  pca_variance_to_keep: 0.95
+  gmm_k_min: 2
+  gmm_k_max: 40
+  gmm_covariance_type: diag
+  gmm_n_init: 5
+
+baseline:
+  c_grid: [0.01, 0.1, 1.0, 10.0]
+  max_iter: 2000
+
+lstm:
+  hidden_size: 64
+  num_layers: 1
+  dropout: 0.3
+  window_seconds: 3.0
+  window_hop_seconds: 1.5
+  batch_size: 64
+  learning_rate: 0.001
+  max_epochs: 50
+  patience: 7
+
+evaluation:
+  # Keep false until hyperparameters are frozen. The test set is then used once.
+  evaluate_test: false
+  n_bootstrap: 2000
+  ci_level: 0.95

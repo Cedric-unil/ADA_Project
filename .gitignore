@@ -1,0 +1,40 @@
+# Generated with Claude Code (Anthropic): ignore data, caches, checkpoints, environments and editor settings.
+
+# Data: the audio must never be committed (the licence forbids reposting).
+data/*
+!data/README.md
+
+# Generated artefacts that are not tracked. Figures and tables are tracked.
+results/models/*
+!results/models/.gitkeep
+results/logs/*
+!results/logs/.gitkeep
+
+# Safety net in case audio or model files land outside the folders above.
+*.wav
+*.flac
+*.mp3
+*.parquet
+*.npz
+*.npy
+*.pt
+*.pth
+*.joblib
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

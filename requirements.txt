@@ -1,0 +1,32 @@
+# Generated with Claude Code (Anthropic): pinned direct dependencies for Python 3.13.
+# The extra index supplies CPU-only PyTorch, so Linux installs skip the large GPU builds.
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# Data and numerics
+numpy==2.5.4
+scipy==1.18.1
+pandas==3.1.0
+pyarrow==26.0.0
+huggingface_hub==2.4.0
+PyYAML==6.0.3
+
+# Audio
+librosa==1.0.0
+soundfile==0.14.0
+
+# Models
+scikit-learn==1.9.1
+torch==2.15.0
+
+# Figures
+matplotlib==3.11.2
+
+# Notebooks
+jupyter==1.1.1
+nbconvert==7.17.2
+ipykernel==7.4.0
+nbstripout==0.9.1
+
+# Tests and lint
+pytest==9.2.0
+ruff==0.17.3
