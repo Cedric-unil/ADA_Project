@@ -1,6 +1,6 @@
 # Generated with Claude Code (Anthropic): single source of paths, seeds and hyperparameters.
 # All paths are relative to the repository root.
-# Hyperparameters are starting values. Tune them on the validation set only.
+# Hyperparameters are starting values. Tune them by cross-validation on the training set only.
 
 seed: 42
 
@@ -20,10 +20,16 @@ data:
 
 prepare:
   min_cuts_per_species: 20
-  # Stage 02 refuses to run while this is null. It never falls back to a random split.
-  grouping_key: null
-  val_fraction: 0.15
+  # Cuts are grouped by recording tape: the first five digits of the Watkins file name, for
+  # example tape 72021 in 72021005.wav. Stage 02 refuses to run while this is null. It never
+  # falls back to a random split.
+  grouping_key: tape_id
+  # At least one tape for the test set and two for training, so that every species is in the
+  # test set and in the training part of every cross-validation fold.
+  min_groups_per_species: 3
   test_fraction: 0.15
+  # Grouped cross-validation folds of the training set, used to tune hyperparameters.
+  n_cv_folds: 5
 
 features:
   n_mfcc: 13

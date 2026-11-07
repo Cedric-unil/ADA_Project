@@ -3,7 +3,7 @@
 
 ## What this project does
 
-This project asks whether species identity in marine mammal calls is carried mainly by spectral shape or whether temporal structure adds information, by comparing a logistic regression on time-averaged MFCC statistics with a small LSTM on MFCC sequences. It also tests whether clusters found without labels recover species, using the Watkins Marine Mammal Sound Database with train, validation and test splits grouped by source recording.
+This project asks whether species identity in marine mammal calls is carried mainly by spectral shape or whether temporal structure adds information, by comparing a logistic regression on time-averaged MFCC statistics with a small LSTM on MFCC sequences. It also tests whether clusters found without labels recover species, using the Watkins Marine Mammal Sound Database, with a held-out test set and cross-validation folds grouped by recording tape.
 
 ## Install
 
@@ -24,7 +24,7 @@ Run from the repository root with the environment active. Each stage reads only 
 | Stage | Command | Equivalent without Make | Approximate time |
 |---|---|---|---|
 | Get data | `make data` | `python code/01_get_data.py` | about 2 min, nearly all of it the download |
-| Prepare | `make prepare` | `python code/02_prepare.py` | to be measured |
+| Prepare | `make prepare` | `python code/02_prepare.py` | a few seconds |
 | Features | `make features` | `python code/03_features.py` | to be measured |
 | Unsupervised | `make unsupervised` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/04_unsupervised.ipynb` | to be measured |
 | Supervised | `make supervised` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/05_supervised.ipynb` | to be measured |
@@ -38,6 +38,17 @@ Run from the repository root with the environment active. Each stage reads only 
 - `results/tables/`: every table in the paper, as `.csv` and `.tex`.
 - `results/models/` and `results/logs/`: trained models and run logs, not tracked in git.
 - `data/`: downloaded audio and cached features, not tracked in git. See [data/README.md](data/README.md).
+
+## How the data are cleaned and split
+
+Stage 02 makes these choices, all set in `config.yaml`:
+
+- Audio that appears under two species labels is dropped entirely (25 files, 50 rows). A single-label model cannot be right on both copies.
+- Cuts are grouped by recording tape, the first five digits of the Watkins file name (tape 72021 in `72021005.wav`). No tape is in both the training and the test set, or in two cross-validation folds.
+- A species needs at least 20 cuts and 3 tapes, so that it can have a test tape and two training tapes. 23 species remain.
+- Whole tapes holding about 15% of the cuts form the test set, which includes every species. The rest is split into 5 grouped cross-validation folds for tuning.
+
+`results/tables/data_flow` and `results/tables/split_summary` give the counts at each step and per species. Some species have only one or two cuts in the test set because of how their tapes are sized, so per-species test results are noisy.
 
 ## Data source and licence
 

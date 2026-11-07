@@ -18,8 +18,9 @@ soundfile==0.14.0
 scikit-learn==1.9.1
 torch==2.15.0
 
-# Figures
+# Figures and tables (pandas needs Jinja2 to write LaTeX tables)
 matplotlib==3.11.2
+Jinja2==3.1.6
 
 # Notebooks
 jupyter==1.1.1

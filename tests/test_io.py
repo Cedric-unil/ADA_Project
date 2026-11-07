@@ -6,12 +6,13 @@ import logging
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
 import pytest
 import soundfile as sf
 
-from ecoacoustics.io import build_inventory, check_inventory
+from ecoacoustics.io import build_inventory, check_inventory, read_metadata
 
 
 def _wav_bytes(n_frames: int, sample_rate: int = 16000) -> bytes:
@@ -67,3 +68,15 @@ def test_check_inventory_reports_wrong_count_and_repeated_audio(
 
     assert "expected 3" in caplog.text
     assert "2 rows share their audio" in caplog.text
+
+
+def test_metadata_ids_are_read_back_as_strings(tmp_path: Path) -> None:
+    path = tmp_path / "metadata.csv"
+    pd.DataFrame({"cut_id": ["72021005", "7801800H"], "tape_id": ["72021", "78018"]}).to_csv(
+        path, index=False
+    )
+
+    metadata = read_metadata(path)
+
+    assert metadata["cut_id"].tolist() == ["72021005", "7801800H"]
+    assert metadata["tape_id"].tolist() == ["72021", "78018"]

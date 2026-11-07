@@ -1,0 +1,6 @@
+Step,Cuts,Species,Tapes
+Inventory from stage 01,1697,32,151
+Drop audio labelled with more than one species,1647,32,149
+Keep species with at least 20 cuts and 3 tapes,1316,23,134
+Train set,1113,23,106
+Test set,203,23,28

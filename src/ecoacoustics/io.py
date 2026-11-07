@@ -85,3 +85,8 @@ def check_inventory(inventory: pd.DataFrame, expected_cuts: int) -> None:
             repeated,
             inventory["audio_sha1"].nunique(),
         )
+
+
+def read_metadata(path: Path) -> pd.DataFrame:
+    """Read the metadata saved by stage 02, keeping cut and tape ids as strings."""
+    return pd.read_csv(path, dtype={"cut_id": str, "tape_id": str})

@@ -19,6 +19,7 @@ Running log of AI assistance, for the paper appendix. The tool used is Claude Co
 | 2026-11-02 | `src/ecoacoustics/io.py`, `splits.py`, `features.py`, `models.py`, `evaluation.py`, `plotting.py` | Package module placeholders, filled in at their stages | |
 | 2026-11-02 | `tests/test_config.py`, `tests/test_utils.py` | Test config path resolution and seed reproducibility | |
 | 2026-11-02 | `code/01_get_data.py`, `src/ecoacoustics/io.py`, `tests/test_io.py` | Download the data at a pinned revision and save a per-cut inventory; test it on synthetic audio | |
+| 2026-11-06 | `code/02_prepare.py`, `src/ecoacoustics/splits.py`, `src/ecoacoustics/plotting.py`, `src/ecoacoustics/io.py`, `tests/test_splits.py`, `tests/test_plotting.py`, `tests/test_io.py`, `config.yaml`, `requirements.txt`, `README.md`, `data/README.md` | Stage 02: drop audio with conflicting species labels, group cuts by tape, keep species with at least 20 cuts and 3 tapes, hold out a grouped test set covering every species, assign grouped cross-validation folds, check the split, and save the data-flow and split-summary tables | |
 
 ## Code adapted from external sources
 
