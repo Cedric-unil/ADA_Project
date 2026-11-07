@@ -25,7 +25,7 @@ Run from the repository root with the environment active. Each stage reads only 
 |---|---|---|---|
 | Get data | `make data` | `python code/01_get_data.py` | about 2 min, nearly all of it the download |
 | Prepare | `make prepare` | `python code/02_prepare.py` | a few seconds |
-| Features | `make features` | `python code/03_features.py` | to be measured |
+| Features | `make features` | `python code/03_features.py` | about 10 s |
 | Unsupervised | `make unsupervised` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/04_unsupervised.ipynb` | to be measured |
 | Supervised | `make supervised` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/05_supervised.ipynb` | to be measured |
 | Figures | `make figures` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/06_figures.ipynb` | to be measured |
@@ -49,6 +49,17 @@ Stage 02 makes these choices, all set in `config.yaml`:
 - Whole tapes holding about 15% of the cuts form the test set, which includes every species. The rest is split into 5 grouped cross-validation folds for tuning.
 
 `results/tables/data_flow` and `results/tables/split_summary` give the counts at each step and per species. Some species have only one or two cuts in the test set because of how their tapes are sized, so per-species test results are noisy.
+
+## How the features are computed
+
+Stage 03 makes these choices, all set in `config.yaml`:
+
+- Every cut is resampled to 16 kHz. The 237 cuts recorded below that rate (every fin whale cut, and nearly every harp seal, humpback and northern right whale cut) have nothing above half their native rate, so a model could recognise them by the empty high frequencies alone. Stage 05 checks how much the sample rate on its own reveals about species, and repeats the main comparison without these cuts.
+- Every cut is scaled so its loudest sample is 1. This removes differences in recording gain between tapes but keeps how loudness changes within a cut.
+- Every 10 ms, 13 MFCCs (40 mel bands up to 8 kHz, 32 ms frames) and their deltas are computed, giving 26 numbers per frame. The LSTM reads these frame sequences.
+- Each cut is also summarised by the mean and standard deviation of those 26 numbers over all its frames (52 numbers per cut). The logistic regression and the clustering use these.
+
+Nothing is standardised at this stage: scalers are fitted later, on training data only.
 
 ## Data source and licence
 

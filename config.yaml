@@ -32,6 +32,12 @@ prepare:
   n_cv_folds: 5
 
 features:
+  # Every cut is resampled to this rate. Native rates run from 600 Hz to 166.6 kHz, and cuts
+  # recorded below this rate have nothing above half their native rate; stage 05 checks how
+  # much that alone reveals about species.
+  sample_rate: 16000
+  # Scale each cut so its loudest sample is 1, removing differences in recording gain.
+  peak_normalise: true
   n_mfcc: 13
   n_fft: 512
   hop_length: 160

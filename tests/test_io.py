@@ -12,7 +12,7 @@ import pyarrow.parquet as pq
 import pytest
 import soundfile as sf
 
-from ecoacoustics.io import build_inventory, check_inventory, read_metadata
+from ecoacoustics.io import build_inventory, check_inventory, read_cut_audio, read_metadata
 
 
 def _wav_bytes(n_frames: int, sample_rate: int = 16000) -> bytes:
@@ -80,3 +80,22 @@ def test_metadata_ids_are_read_back_as_strings(tmp_path: Path) -> None:
 
     assert metadata["cut_id"].tolist() == ["72021005", "7801800H"]
     assert metadata["tape_id"].tolist() == ["72021", "78018"]
+
+
+def test_read_cut_audio_returns_the_selected_cuts_and_checks_their_hash(tmp_path: Path) -> None:
+    (tmp_path / "data").mkdir()
+    path = tmp_path / "data" / "train-00000-of-00001.parquet"
+    _write_parquet(path, [8000, 16000, 32000])
+    meta = build_inventory([path]).iloc[[2, 0]].assign(cut_id=["c", "a"])
+
+    cuts = {cut_id: (waveform, rate) for cut_id, waveform, rate in read_cut_audio(meta, tmp_path)}
+
+    assert {cut_id: len(waveform) for cut_id, (waveform, _) in cuts.items()} == {
+        "a": 8000,
+        "c": 32000,
+    }
+    assert all(rate == 16000 for _, rate in cuts.values())
+
+    meta.loc[meta["cut_id"] == "a", "audio_sha1"] = "0" * 40
+    with pytest.raises(ValueError, match="does not match"):
+        list(read_cut_audio(meta, tmp_path))

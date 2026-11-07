@@ -21,6 +21,9 @@ Running log of AI assistance, for the paper appendix. The tool used is Claude Co
 | 2026-11-02 | `code/01_get_data.py`, `src/ecoacoustics/io.py`, `tests/test_io.py` | Download the data at a pinned revision and save a per-cut inventory; test it on synthetic audio | |
 | 2026-11-06 | `code/02_prepare.py`, `src/ecoacoustics/splits.py`, `src/ecoacoustics/plotting.py`, `src/ecoacoustics/io.py`, `tests/test_splits.py`, `tests/test_plotting.py`, `tests/test_io.py`, `config.yaml`, `requirements.txt`, `README.md`, `data/README.md` | Stage 02: drop audio with conflicting species labels, group cuts by tape, keep species with at least 20 cuts and 3 tapes, hold out a grouped test set covering every species, assign grouped cross-validation folds, check the split, and save the data-flow and split-summary tables | |
 
+| 2026-11-07 | `code/03_features.py`, `src/ecoacoustics/features.py`, `src/ecoacoustics/io.py`, `tests/test_features.py`, `tests/test_io.py`, `config.yaml`, `README.md`, `data/README.md` | Stage 03: resample every cut to 16 kHz, peak-normalise it, compute 13 MFCCs and their deltas per frame and their mean and standard deviation per cut, cache them with the settings used, and check each cut's audio against its stage 01 hash; test on synthetic audio | |
+| 2026-11-07 | `CLAUDE.md` | Bring it up to date with the repository after stages 01-03 and the proposal's approval | |
+
 ## Code adapted from external sources
 
 None so far.
