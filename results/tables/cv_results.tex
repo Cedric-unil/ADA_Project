@@ -1,13 +1,13 @@
-\begin{tabular}{llrr}
+\begin{tabular}{llrrrrrr}
 \toprule
-Model & Setting & Macro-F1 & Accuracy \\
+Model & Setting & Macro-F1 & Macro-F1 SD & Macro-F1 lowest & Macro-F1 highest & Accuracy & Accuracy SD \\
 \midrule
-Chance & uniform guess & 0.042 & 0.044 \\
-Majority class &  & 0.003 & 0.023 \\
-Sample rate only & decision tree & 0.245 & 0.245 \\
-Logistic regression (whole cuts) & C = 1.0 & 0.322 & 0.356 \\
-Logistic regression (windows) & C = 10.0 & 0.332 & 0.374 \\
-LSTM (shuffled frames) & 32 epochs & 0.314 & 0.348 \\
-LSTM & 26 epochs & 0.323 & 0.351 \\
+Chance & uniform guess & 0.042 & -- & -- & -- & 0.044 & -- \\
+Majority class &  & 0.003 & -- & -- & -- & 0.023 & -- \\
+Sample rate only & decision tree & 0.245 & -- & -- & -- & 0.245 & -- \\
+Logistic regression (whole cuts) & C = 1.0 & 0.322 & -- & -- & -- & 0.356 & -- \\
+Logistic regression (windows) & C = 10.0 & 0.332 & -- & -- & -- & 0.374 & -- \\
+LSTM (shuffled frames) & 38 epochs, 5 seeds & 0.300 & 0.010 & 0.284 & 0.309 & 0.341 & 0.011 \\
+LSTM & 32 epochs, 5 seeds & 0.302 & 0.020 & 0.271 & 0.321 & 0.333 & 0.022 \\
 \bottomrule
 \end{tabular}

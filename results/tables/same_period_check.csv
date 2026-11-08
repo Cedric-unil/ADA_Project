@@ -1,0 +1,4 @@
+Trained on,Macro-F1,Lowest repeat,Highest repeat
+All other tapes,0.2505769689059882,,
+Same number of tapes dropped at random,0.20254495480692772,0.185512421349916,0.22123558278812722
+Tapes sharing the first two digits dropped,0.1474300187081988,,
