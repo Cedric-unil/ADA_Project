@@ -73,6 +73,9 @@ lstm:
   # of epochs, from 1 to max_epochs, is tuned like C: the one with the best cross-validated
   # macro-F1 is kept. In the pilot the best epoch was about 26.
   max_epochs: 40
+  # CPU threads for the LSTMs. Fixed because the same seed gives different results on a different
+  # number of threads, through rounding. A different CPU may still differ slightly.
+  num_threads: 8
 
 evaluation:
   # Keep false until hyperparameters are frozen. The test set is then used once.

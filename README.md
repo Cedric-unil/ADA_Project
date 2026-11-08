@@ -99,6 +99,7 @@ Stage 05 compares seven models, with settings in `config.yaml`:
 - **LSTM design.** The classifier reads the average of the LSTM's outputs over the window. That averaging and the learning rate of 0.003 were chosen in a pilot on validation fold 0, because the first design (last output only, learning rate 0.001) was still far from converged after 80 epochs.
 - **Tuning.** One setting per model is tuned on the pooled cross-validated macro-F1: `C` for the logistic regressions (0.01 to 10) and the number of epochs for the LSTMs (1 to 40). The window length is fixed at 3 s rather than tuned, to keep the stage within minutes.
 - **Order.** The shuffled LSTM is the same model, with the same seed, as the LSTM, but the frames in each window are put in random order. The gap between the two measures what order adds beyond the roughly 40 ms that each frame's deltas already describe.
+- **Reproducibility.** The same seed gives different LSTM results on a different number of CPU threads, through rounding, so the LSTMs always run on 8 threads (`lstm.num_threads` in `config.yaml`). A different CPU may still give slightly different numbers.
 - **Test set.** It is used once, when `evaluation.evaluate_test` is set to true. Gaps in macro-F1 get a 95% bootstrap interval that resamples whole test tapes, and the comparison is repeated on the cuts recorded at 16 kHz or above.
 
 ## Data source and licence

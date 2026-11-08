@@ -8,7 +8,9 @@ in order can tell them apart.
 
 import numpy as np
 import pytest
+import torch
 
+from ecoacoustics import models
 from ecoacoustics.features import window_statistics
 from ecoacoustics.models import (
     average_by_cut,
@@ -27,6 +29,7 @@ SETTINGS = {
     "batch_size": 16,
     "eval_batch_size": 64,
     "learning_rate": 0.01,
+    "num_threads": 2,
 }
 
 
@@ -87,6 +90,49 @@ def test_lstm_training_is_identical_with_the_same_seed() -> None:
     _, second = _lstm_accuracy(shuffle_order=True, n_epochs=3)
 
     np.testing.assert_array_equal(first, second)
+
+
+def test_ordered_and_shuffled_lstm_draw_the_same_windows_in_the_same_batches(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    rng = np.random.default_rng(0)
+    frames = [rng.normal(size=(30 + i, 2)).astype(np.float32) for i in range(12)]
+    y_train = np.arange(12) % 3
+    original_window, original_batch = models.random_window, models._batch
+
+    def record(shuffle_order: bool) -> tuple[list[float], list[list[tuple[float, ...]]]]:
+        starts: list[float] = []
+        batches: list[list[tuple[float, ...]]] = []
+
+        def window_spy(*args: object) -> np.ndarray:
+            window = original_window(*args)
+            starts.append(float(window[0, 0]))  # the first value, before any shuffling
+            return window
+
+        def batch_spy(batch: list[np.ndarray], *args: object) -> object:
+            # Shuffling keeps the values of a window, so its sorted values identify it.
+            batches.append([tuple(np.sort(window[:, 0]).tolist()) for window in batch])
+            return original_batch(batch, *args)
+
+        monkeypatch.setattr(models, "random_window", window_spy)
+        monkeypatch.setattr(models, "_batch", batch_spy)
+        train_lstm(frames, y_train, frames[:2], 3, SETTINGS, 10, 10, 3, shuffle_order, 42)
+        return starts, batches
+
+    ordered_starts, ordered_batches = record(shuffle_order=False)
+    shuffled_starts, shuffled_batches = record(shuffle_order=True)
+
+    assert ordered_starts == shuffled_starts
+    assert ordered_batches == shuffled_batches
+
+
+def test_lstm_runs_on_the_configured_number_of_threads() -> None:
+    before = torch.get_num_threads()
+    try:
+        _lstm_accuracy(shuffle_order=False, n_epochs=1)
+        assert torch.get_num_threads() == SETTINGS["num_threads"]
+    finally:
+        torch.set_num_threads(before)
 
 
 def test_logistic_regression_returns_a_column_for_classes_absent_from_training() -> None:

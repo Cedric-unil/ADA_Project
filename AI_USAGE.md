@@ -27,6 +27,7 @@ Running log of AI assistance, for the paper appendix. The tool used is Claude Co
 
 | 2026-11-08 | `src/ecoacoustics/pipeline.py`, `src/ecoacoustics/menu.py`, `run.py`, `menu.ipynb`, `tests/test_pipeline.py`, `Makefile`, `requirements.txt`, `README.md`, `CLAUDE.md` | An interactive menu with buttons that runs the whole pipeline and stays future-proof: stages found automatically in `code/`, run one, several, all or only the out-of-date ones, with live output, Stop, tests and lint; out-of-date detection from each stage's code, imported package modules, config sections and input files; the same menu in a terminal | |
 | 2026-11-08 | `src/ecoacoustics/menu.py`, `src/ecoacoustics/pipeline.py`, `run.py`, `tests/test_pipeline.py`, `requirements.txt`, `README.md`, `CLAUDE.md` | Open the menu with a terminal command instead of a notebook: `python run.py` now opens a desktop window with the same buttons (Tkinter). Removed `menu.ipynb` and the text menu; the direct commands stay | |
+| 2026-11-08 | `src/ecoacoustics/models.py`, `config.yaml`, `tests/test_models.py`, `README.md`, `results/tables/cv_results.csv`, `results/tables/cv_results.tex` | Fixes from a project audit: give the frame shuffling its own random generator so that the LSTM and its shuffled control see the same windows and batches; run the LSTMs on a fixed 8 CPU threads, because the thread count changes the results, and warn in the README that a different CPU may differ; delete the leftover `menu.ipynb`; activate `nbstripout` | |
 
 ## Code adapted from external sources
 

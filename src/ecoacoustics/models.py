@@ -197,10 +197,17 @@ def train_lstm(
     windows. With ``shuffle_order``, the frames inside every window are put in random order,
     in training and in evaluation. ``settings`` is the ``lstm`` section of config.yaml.
 
+    With the same seed, the ordered and the shuffled model start from the same weights and see
+    the same windows in the same batches. The number of CPU threads is fixed by
+    ``settings["num_threads"]`` because it changes the results, through rounding.
+
     Returns an array of shape ``(n_epochs, len(eval_frames), n_classes)``.
     """
     rng = np.random.default_rng(seed)
+    # Shuffling has its own generator: sharing one would change which windows and batches come next.
+    shuffle_rng = np.random.default_rng([seed, 1])
     torch.manual_seed(seed)
+    torch.set_num_threads(settings["num_threads"])
     scale = frame_scaler(train_frames)
     model = CallLSTM(
         train_frames[0].shape[1],
@@ -220,7 +227,7 @@ def train_lstm(
         eval_windows += windows
         eval_owner += [i] * len(windows)
     if shuffle_order:
-        eval_windows = [rng.permutation(w) for w in eval_windows]
+        eval_windows = [shuffle_rng.permutation(w) for w in eval_windows]
     eval_owner = np.array(eval_owner)
 
     history = np.empty((n_epochs, len(eval_frames), n_classes), dtype=np.float32)
@@ -228,7 +235,7 @@ def train_lstm(
         model.train()
         crops = [random_window(frames, window, rng) for frames in train_frames]
         if shuffle_order:
-            crops = [rng.permutation(crop) for crop in crops]
+            crops = [shuffle_rng.permutation(crop) for crop in crops]
         order = rng.permutation(len(crops))
         for start in range(0, len(order), settings["batch_size"]):
             batch = order[start : start + settings["batch_size"]]
