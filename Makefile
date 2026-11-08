@@ -8,7 +8,7 @@ PYTHON ?= python
 RUN := $(PYTHON) run.py
 
 .NOTPARALLEL:
-.PHONY: all outdated status menu data prepare features unsupervised supervised analysis figures test lint
+.PHONY: all outdated status menu data prepare features unsupervised supervised same_period lstm_pilot analysis figures test lint
 
 all:
 	$(RUN) all
@@ -37,8 +37,14 @@ unsupervised:
 supervised:
 	$(RUN) supervised
 
+same_period:
+	$(RUN) same_period
+
+lstm_pilot:
+	$(RUN) lstm_pilot
+
 analysis:
-	$(RUN) unsupervised supervised
+	$(RUN) unsupervised supervised same_period lstm_pilot
 
 figures:
 	$(RUN) figures

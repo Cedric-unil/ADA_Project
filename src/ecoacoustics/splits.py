@@ -12,8 +12,9 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import StratifiedGroupKFold
 
-# A Watkins cut is named by the five-digit number of its tape, whose first two digits are the
-# recording year, followed by a three-character cut number: tape 72021 in 72021005.wav.
+# A Watkins cut is named by the five-digit number of its tape, followed by a three-character cut
+# number: tape 72021 in 72021005.wav. The first two digits may encode the recording year (72 =
+# 1972), but that meaning is unconfirmed.
 WATKINS_FILE_NAME = r"(?P<tape_id>\d{5})[0-9A-Za-z]{3}\.wav"
 TEST_FOLD = -1
 
