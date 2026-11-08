@@ -118,25 +118,41 @@ class CallLSTM(nn.Module):
 
     The LSTM's output at each frame depends on every frame before it, so the average still
     depends on their order. Averaging over all frames, rather than keeping only the last
-    output, makes training much faster and steadier (pilot on one validation fold).
+    output, makes training much faster and steadier (the pilot in stage 05b, on one validation
+    fold). ``use_last_output`` gives the first design, which that pilot compares.
     """
 
     def __init__(
-        self, n_features: int, n_classes: int, hidden_size: int, num_layers: int, dropout: float
+        self,
+        n_features: int,
+        n_classes: int,
+        hidden_size: int,
+        num_layers: int,
+        dropout: float,
+        use_last_output: bool = False,
     ) -> None:
         super().__init__()
         self.lstm = nn.LSTM(n_features, hidden_size, num_layers=num_layers, batch_first=True)
         self.dropout = nn.Dropout(dropout)
         self.classifier = nn.Linear(hidden_size, n_classes)
+        self.use_last_output = use_last_output
 
     def forward(self, x: torch.Tensor, lengths: torch.Tensor) -> torch.Tensor:
         # Packing makes the LSTM stop at each window's real end instead of reading the padding,
         # and the mask leaves the padding out of the average.
         packed = pack_padded_sequence(x, lengths, batch_first=True, enforce_sorted=False)
-        outputs, _ = pad_packed_sequence(self.lstm(packed)[0], batch_first=True)
+        packed_outputs, (last_output, _) = self.lstm(packed)
+        if self.use_last_output:
+            return self.classifier(self.dropout(last_output[-1]))
+        outputs, _ = pad_packed_sequence(packed_outputs, batch_first=True)
         real = torch.arange(outputs.shape[1])[None, :] < lengths[:, None]
         average = (outputs * real.unsqueeze(-1)).sum(dim=1) / lengths[:, None]
         return self.classifier(self.dropout(average))
+
+
+def lstm_seeds(seed: int, n_seeds: int) -> list[int]:
+    """The seeds an LSTM is trained on: the seed from config.yaml, then the next integers."""
+    return [seed + offset for offset in range(n_seeds)]
 
 
 def frame_scaler(frames: list[np.ndarray]) -> tuple[np.ndarray, np.ndarray]:
@@ -215,6 +231,7 @@ def train_lstm(
         settings["hidden_size"],
         settings["num_layers"],
         settings["dropout"],
+        settings.get("use_last_output", False),
     )
     optimiser = torch.optim.Adam(model.parameters(), lr=settings["learning_rate"])
     class_weights = torch.tensor(balanced_weights(y_train, n_classes), dtype=torch.float32)

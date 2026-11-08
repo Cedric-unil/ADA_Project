@@ -18,3 +18,14 @@ def test_table_is_saved_as_csv_and_escaped_latex(tmp_path: Path) -> None:
     assert r"Rissos\_Dolphin" in tex
     assert r"Test share (\%)" in tex
     assert "15.0" in tex
+
+
+def test_missing_values_are_blank_in_the_csv_and_marked_in_the_latex(tmp_path: Path) -> None:
+    table = pd.DataFrame({"Model": ["LSTM", "Chance"], "SD": [0.012, float("nan")]})
+
+    save_table(table, "scores", tmp_path, float_format="%.3f")
+
+    assert (tmp_path / "scores.csv").read_text(encoding="utf-8").splitlines()[2] == "Chance,"
+    tex = (tmp_path / "scores.tex").read_text(encoding="utf-8")
+    assert "LSTM & 0.012" in tex
+    assert "Chance & --" in tex

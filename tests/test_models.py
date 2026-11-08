@@ -13,11 +13,13 @@ import torch
 from ecoacoustics import models
 from ecoacoustics.features import window_statistics
 from ecoacoustics.models import (
+    CallLSTM,
     average_by_cut,
     fit_predict_logistic,
     fit_predict_rate_tree,
     fit_predict_window_logistic,
     frame_scaler,
+    lstm_seeds,
     train_lstm,
 )
 
@@ -133,6 +135,81 @@ def test_lstm_runs_on_the_configured_number_of_threads() -> None:
         assert torch.get_num_threads() == SETTINGS["num_threads"]
     finally:
         torch.set_num_threads(before)
+
+
+def test_lstm_seeds_start_from_the_seed_in_the_config() -> None:
+    assert lstm_seeds(42, 5) == [42, 43, 44, 45, 46]
+
+
+def test_lstm_can_read_the_last_output_for_the_pilot() -> None:
+    torch.manual_seed(0)
+    last = CallLSTM(2, 3, 4, 1, 0.0, use_last_output=True).eval()
+    average = CallLSTM(2, 3, 4, 1, 0.0).eval()
+    average.load_state_dict(last.state_dict())
+    short = torch.randn(5, 2)
+    padded = torch.zeros(9, 2)
+    padded[:5] = short
+    lengths = torch.tensor([5, 9])
+    batch = torch.stack([padded, torch.randn(9, 2)])
+
+    with torch.no_grad():
+        outputs, _ = last.lstm(short[None])
+        from_last, from_average = last(batch, lengths), average(batch, lengths)
+        expected_last = last.classifier(outputs[0, -1])
+        expected_average = last.classifier(outputs[0].mean(dim=0))
+
+    # The last real output of the short window, not the output over its padding.
+    torch.testing.assert_close(from_last[0], expected_last)
+    torch.testing.assert_close(from_average[0], expected_average)
+
+
+def test_logistic_scaler_is_fitted_on_training_rows_only() -> None:
+    # Required by CLAUDE.md. PCA joins this requirement when stage 04 exists.
+    rng = np.random.default_rng(0)
+    x_train = rng.normal(size=(60, 3))
+    y_train = (x_train[:, 0] > 0).astype(int)
+    x_eval = rng.normal(size=(10, 3))
+    extreme = 1000 * x_eval
+
+    alone = fit_predict_logistic(x_train, y_train, x_eval, 2, 1.0, 2000)
+    beside_extreme_rows = fit_predict_logistic(
+        x_train, y_train, np.vstack([x_eval, extreme]), 2, 1.0, 2000
+    )
+
+    # A scaler fitted on the evaluated rows too would be changed by the extreme rows.
+    np.testing.assert_array_equal(alone, beside_extreme_rows[:10])
+
+
+def test_window_logistic_scaler_is_fitted_on_training_rows_only() -> None:
+    rng = np.random.default_rng(0)
+    train_windows = [rng.normal(size=(3, 4)) for _ in range(30)]
+    y_train = np.arange(30) % 2
+    eval_windows = [rng.normal(size=(2, 4)) for _ in range(5)]
+    extreme = [1000 * windows for windows in eval_windows]
+
+    alone = fit_predict_window_logistic(train_windows, y_train, eval_windows, 2, 1.0, 2000)
+    beside_extreme_rows = fit_predict_window_logistic(
+        train_windows, y_train, eval_windows + extreme, 2, 1.0, 2000
+    )
+
+    np.testing.assert_array_equal(alone, beside_extreme_rows[:5])
+
+
+def test_lstm_frame_scaler_is_fitted_on_training_frames_only() -> None:
+    train_frames, y_train = _order_task(20, seed=0)
+    eval_frames, _ = _order_task(6, seed=1)
+    extreme = [1000 * frames for frames in eval_frames]
+
+    def run(evaluated: list[np.ndarray]) -> np.ndarray:
+        return train_lstm(
+            train_frames, y_train, evaluated, 2, SETTINGS, LENGTH, LENGTH, 2, False, 0
+        )
+
+    alone = run(eval_frames)
+    beside_extreme_frames = run(eval_frames + extreme)
+
+    # Only close, not equal: a larger batch can round slightly differently.
+    np.testing.assert_allclose(alone, beside_extreme_frames[:, :6], atol=1e-5)
 
 
 def test_logistic_regression_returns_a_column_for_classes_absent_from_training() -> None:
