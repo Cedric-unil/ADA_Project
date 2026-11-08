@@ -17,6 +17,24 @@ pip install -e .
 nbstripout --install --attributes .gitattributes
 ```
 
+## Running the pipeline: menu or direct commands
+
+- **Menu:** run `python run.py` from the repository root. A window opens that lists every stage with its status and has buttons to run one stage, the ticked stages, all of them, or only the out-of-date ones, plus Stop, the tests and the linter. Output appears live in the window. Close the window to get the terminal back. If a stage is still running, the window offers to stop it first.
+- **Direct commands:** `python run.py list` (status), `python run.py all`, `python run.py outdated`, `python run.py 03 05` or `python run.py features`. Run `python run.py --help` for more. These need no window and no Make.
+
+**A new stage needs no extra setup.** A stage is any file in `code/` named `NN_name.py` or `NN_name.ipynb` (a letter may follow the number, as in `04a_name.ipynb`). The menu, `run.py` and `make all` find stages by themselves and run them in number order. The menu's description comes from the script's docstring or the notebook's first markdown cell. A window that is already open shows a new stage after you press **Refresh**.
+
+**What "out of date" means.** After every successful run, the runner records what the stage depends on. A stage is out of date when any of these changed since its last successful run:
+
+- its code;
+- a module of `src/ecoacoustics/` that it imports, directly or through another module;
+- a section of `config.yaml` that it reads;
+- a file it could read: new data, or the outputs of an earlier stage that re-ran.
+
+A stage is also out of date when one of its outputs was deleted. **Run out-of-date** re-runs exactly these stages, in order, plus any later stage whose inputs they rewrite. Changes to line endings alone are ignored. Data and results folders are taken from the `paths` section of `config.yaml`, so a folder added there is tracked too.
+
+Each run is logged in `results/logs/runs/`, along with the history used to decide what is out of date. The executed copy of each notebook stage, with its outputs, is saved in `results/logs/notebooks/`. None of this is tracked in git.
+
 ## What to run, in order
 
 Run from the repository root with the environment active. Each stage reads only what the previous stage saved.
@@ -30,7 +48,7 @@ Run from the repository root with the environment active. Each stage reads only 
 | Supervised | `make supervised` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/05_supervised.ipynb` | about 9 min on a 16-core laptop, nearly all of it the LSTMs; a few minutes more once the test set is unlocked |
 | Figures | `make figures` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/06_figures.ipynb` | to be measured |
 
-`make all` runs every stage in order, and `make analysis` runs the unsupervised and supervised stages. `make test` runs the tests and `make lint` runs ruff.
+`make all` (or `python run.py all`) runs every stage in order, `make outdated` runs only the out-of-date ones, and `make analysis` runs the unsupervised and supervised stages. `make test` runs the tests and `make lint` runs ruff. The notebook commands in the table give the same executed notebook as the runner, which also prints each cell's output as it runs.
 
 ## Outputs
 

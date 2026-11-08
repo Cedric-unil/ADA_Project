@@ -60,7 +60,8 @@ language, keep code readable over clever, and ask before making any research cho
 ├── requirements.txt          # pinned packages
 ├── pyproject.toml            # makes src/ importable: pip install -e .
 ├── config.yaml               # ALL paths, seeds, feature and model hyperparameters
-├── Makefile                  # make data / features / analysis / figures / all
+├── run.py                    # python run.py opens the menu window; or run.py list|all|outdated|03 05
+├── Makefile                  # make data / features / analysis / figures / all, via run.py
 ├── AI_USAGE.md               # running log of AI assistance (feeds the paper appendix)
 ├── .gitignore
 ├── data/                     # gitignored except data/README.md
@@ -68,7 +69,8 @@ language, keep code readable over clever, and ask before making any research cho
 │   ├── interim/              # inventory.csv, metadata.csv (split + folds), excluded.csv
 │   └── features/             # cached MFCC frames and clip statistics (never committed)
 ├── src/ecoacoustics/         # importable package: config, io, splits, features,
-│                             #   models, evaluation, plotting, utils
+│                             #   models, evaluation, plotting, utils;
+│                             #   pipeline (find/run stages, out-of-date checks), menu (window)
 ├── code/                     # thin numbered stages; each loads the previous stage's output
 │   ├── 01_get_data.py
 │   ├── 02_prepare.py         # filtering, metadata, grouped folds saved to file
@@ -87,6 +89,16 @@ language, keep code readable over clever, and ask before making any research cho
 
 Stage scripts stay thin: read config, call package functions, save outputs. Shared code lives in
 `src/ecoacoustics/` and is imported, never copied (requirement 4.9).
+
+**Stages are discovered, not listed.** Any `code/NN_name.py` or `code/NN_name.ipynb` (optionally
+`NNa_name`) is a stage. `run.py` (its menu window and its commands) and `make all` find stages
+automatically and run them in number order, so adding a stage needs no other change. Give each new
+stage a module docstring (script) or a first markdown cell (notebook): its first line is the menu
+description. A stage's
+config dependencies are detected from `config["section"]` / `config.get("section")` /
+`resolve_path(config, ...)` in its code, so read config that way. Handing the whole `config` to a
+function makes the stage depend on every section. Run history and logs live in
+`results/logs/runs/`, and executed notebooks in `results/logs/notebooks/`.
 
 ## Methods (course weeks in brackets)
 
@@ -153,8 +165,7 @@ Stage scripts stay thin: read config, call package functions, save outputs. Shar
 - Every figure and table in the paper is produced by code in the repository.
 - No caches, checkpoints, virtual environments, editor settings (`.vscode/`), data or model files
   in git.
-- Everything must run in the provided **Nuvolos cloud workspace: CPU only, modest resources**. No GPU
-  assumptions. Keep each stage to minutes and cache intermediate results. The README states
+- The README states
   approximate runtimes.
 - No secrets or keys in the code or history.
 
@@ -194,6 +205,10 @@ Stage scripts stay thin: read config, call package functions, save outputs. Shar
 
 ```bash
 pip install -r requirements.txt && pip install -e .
+python run.py           # opens the menu: a window with buttons (Tkinter)
+python run.py list      # status of every stage and why it is out of date
+python run.py outdated  # run only what changed (make outdated)
+python run.py 03 05     # run chosen stages, by number or name
 make data        # 01_get_data.py
 make prepare     # 02_prepare.py
 make features    # 03_features.py
@@ -203,6 +218,7 @@ make all
 pytest
 ```
 
+`make` is not installed on the author's Windows machine; use `python run.py` there.
 Locally the packages are installed in the global Python 3.13 (no virtual environment). Until
 `pip install -e .` has been run there, tests need `src` on the path:
 `PYTHONPATH=src python -m pytest`.
