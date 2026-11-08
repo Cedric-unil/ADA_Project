@@ -132,3 +132,48 @@ def load_frames(features_dir: Path, settings: dict[str, Any]) -> dict[str, np.nd
     frames = np.load(features_dir / FRAMES_FILE)
     index = pd.read_csv(features_dir / INDEX_FILE, dtype={"cut_id": str})
     return {row.cut_id: frames[row.start : row.start + row.n_frames] for row in index.itertuples()}
+
+
+def seconds_to_frames(seconds: float, settings: dict[str, Any]) -> int:
+    """Number of frames in ``seconds`` of sound (100 per second with the default settings)."""
+    return round(seconds * settings["sample_rate"] / settings["hop_length"])
+
+
+def window_starts(n_frames: int, window: int, hop: int) -> np.ndarray:
+    """First frame of each window that together cover a cut.
+
+    Windows start every ``hop`` frames, and one more window ends exactly at the last frame so
+    that the end of the cut is never left out. A cut no longer than one window gives a single
+    window starting at frame 0, which is then simply shorter than ``window``.
+    """
+    if n_frames <= window:
+        return np.array([0])
+    starts = np.arange(0, n_frames - window + 1, hop)
+    if starts[-1] + window < n_frames:
+        starts = np.append(starts, n_frames - window)
+    return starts
+
+
+def cut_windows(frames: np.ndarray, window: int, hop: int) -> list[np.ndarray]:
+    """All windows of one cut, as views into its frames."""
+    return [frames[start : start + window] for start in window_starts(len(frames), window, hop)]
+
+
+def random_window(frames: np.ndarray, window: int, rng: np.random.Generator) -> np.ndarray:
+    """One window at a random position in the cut, or the whole cut if it is shorter."""
+    if len(frames) <= window:
+        return frames
+    start = rng.integers(0, len(frames) - window + 1)
+    return frames[start : start + window]
+
+
+def window_statistics(windows: list[np.ndarray]) -> np.ndarray:
+    """Mean and standard deviation of every column in each window, one row per window.
+
+    The columns are in the same order as in ``clip_stats.csv``: all means, then all standard
+    deviations.
+    """
+    return np.array(
+        [np.concatenate([w.mean(axis=0, dtype=np.float64), w.std(axis=0, dtype=np.float64)])
+         for w in windows]
+    )

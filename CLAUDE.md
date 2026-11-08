@@ -93,8 +93,9 @@ Stage scripts stay thin: read config, call package functions, save outputs. Shar
 1. **Features (done, stage 03):** each cut is resampled to 16 kHz and peak-normalised (loudest
    sample = 1, removes recording gain), then `librosa` MFCCs (13 coefficients) + deltas every
    10 ms; clip-level summary = mean and std of each coefficient and delta (52 numbers). Cached
-   in `data/features/`; read with `load_frames` / `load_clip_stats`. Long clips are cut into
-   fixed windows (2–4 s, tuned on validation) at training time, from the cached frames.
+   in `data/features/`; read with `load_frames` / `load_clip_stats`. Windows of 3 s every
+   1.5 s are cut at training time from the cached frames (fixed, not tuned, to keep stage 05
+   within minutes).
 2. **PCA (11)** on standardized clip-level statistics, not on raw MFCC frames (MFCCs are already
    decorrelated). Report explained variance.
 3. **GMM (12)**, diagonal covariance, K chosen by BIC over a range; evaluate with ARI and NMI against
@@ -104,9 +105,15 @@ Stage scripts stay thin: read config, call package functions, save outputs. Shar
    **Sample-rate checks (decided 7 Nov 2026):** keep all 23 species in the main analysis; add a
    reference model that sees only each cut's native sample rate, and repeat the main comparison
    without the cuts below 16 kHz as a robustness check.
-5. **LSTM (7–8):** PyTorch, 1 layer, 32–64 hidden units, dropout, early stopping on validation;
-   variable lengths via windows + padding/packing; clip prediction = aggregate of window
-   predictions.
+5. **LSTM (7–8):** PyTorch, 1 layer, 64 hidden units, dropout 0.3; the classifier reads the
+   average of the LSTM outputs over the window (packing + mask). Each epoch = one random 3 s
+   window per training cut; clip prediction = average over all its windows. Learning rate
+   0.003 and output averaging chosen in a pilot on validation fold 0. The number of epochs
+   (1–40) is tuned on pooled cross-validated macro-F1, as `C` is for logistic regression; this
+   replaces early stopping.
+   **Controls (decided 7 Nov 2026):** logistic regression on the same windows' statistics (same
+   input as the LSTM), and the same LSTM on frames shuffled within each window (isolates
+   order). Implemented in `code/05_supervised.ipynb`.
 6. **Diagnostics:** per-class confusion matrices, learning curve, accuracy vs estimated
    signal-to-noise ratio, bootstrap 95% interval on the LSTM–baseline macro-F1 gap.
 
@@ -202,10 +209,10 @@ Locally the packages are installed in the global Python 3.13 (no virtual environ
 
 ## Current status and open questions
 
-- Proposal approved (by 7 Nov 2026). Stages 01 (download), 02 (clean, split) and 03 (features)
-  are done. Next: stage 05 (supervised training), then 04 (unsupervised), then 06 (figures).
+- Proposal approved (by 7 Nov 2026). Stages 01 (download), 02 (clean, split), 03 (features)
+  and the cross-validation part of 05 (supervised) are done. **The test set is still locked**
+  (`evaluation.evaluate_test: false`). Next: stage 04 (unsupervised), then 06 (figures), then
+  unlock the test set once all settings are final.
 - Open: is the recording year available (first two digits of the tape id)? Needed for the
-  "era" comparison in H2.
-- Open (stage 05): should the logistic regression see the same windows as the LSTM, and should
-  an LSTM on time-shuffled frames serve as a control for temporal order?
+  "era" comparison in H2; otherwise compare clusters with tapes.
 - When an open question is resolved, update this file.

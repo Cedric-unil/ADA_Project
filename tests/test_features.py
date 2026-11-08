@@ -9,12 +9,17 @@ import pytest
 from ecoacoustics.config import load_config
 from ecoacoustics.features import (
     clip_statistics,
+    cut_windows,
     feature_names,
     load_clip_stats,
     load_frames,
     mfcc_frames,
     prepare_waveform,
+    random_window,
     save_features,
+    seconds_to_frames,
+    window_starts,
+    window_statistics,
 )
 
 SETTINGS = load_config()["features"]
@@ -103,3 +108,31 @@ def test_saved_features_load_back_and_refuse_other_settings(tmp_path: Path) -> N
     assert stats.shape == (2, 1 + 2 * N_COLUMNS)
     with pytest.raises(ValueError, match="different settings"):
         load_frames(tmp_path, {**SETTINGS, "n_mfcc": 20})
+
+
+def test_three_seconds_is_300_frames() -> None:
+    assert seconds_to_frames(3.0, SETTINGS) == 300
+
+
+def test_windows_cover_the_whole_cut() -> None:
+    assert window_starts(5, window=10, hop=5).tolist() == [0]
+    assert window_starts(10, window=4, hop=2).tolist() == [0, 2, 4, 6]
+    assert window_starts(11, window=4, hop=2).tolist() == [0, 2, 4, 6, 7]
+
+
+def test_random_window_has_the_window_length_or_is_the_whole_short_cut() -> None:
+    rng = np.random.default_rng(0)
+    frames = np.arange(20, dtype=np.float32).reshape(10, 2)
+
+    assert len(random_window(frames, 4, rng)) == 4
+    assert len(random_window(frames, 30, rng)) == 10
+
+
+def test_one_window_over_the_whole_cut_matches_the_clip_statistics() -> None:
+    frames = mfcc_frames(_tone(1.0), SETTINGS)
+
+    stats = window_statistics(cut_windows(frames, window=len(frames), hop=1))
+    expected = clip_statistics(frames, feature_names(SETTINGS["n_mfcc"]))
+
+    assert stats.shape == (1, 2 * N_COLUMNS)
+    np.testing.assert_allclose(stats[0], list(expected.values()))

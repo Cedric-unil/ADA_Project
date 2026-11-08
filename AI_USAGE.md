@@ -23,6 +23,7 @@ Running log of AI assistance, for the paper appendix. The tool used is Claude Co
 
 | 2026-11-07 | `code/03_features.py`, `src/ecoacoustics/features.py`, `src/ecoacoustics/io.py`, `tests/test_features.py`, `tests/test_io.py`, `config.yaml`, `README.md`, `data/README.md` | Stage 03: resample every cut to 16 kHz, peak-normalise it, compute 13 MFCCs and their deltas per frame and their mean and standard deviation per cut, cache them with the settings used, and check each cut's audio against its stage 01 hash; test on synthetic audio | |
 | 2026-11-07 | `CLAUDE.md` | Bring it up to date with the repository after stages 01-03 and the proposal's approval | |
+| 2026-11-07 | `code/05_supervised.ipynb`, `src/ecoacoustics/models.py`, `src/ecoacoustics/evaluation.py`, `src/ecoacoustics/features.py`, `tests/test_models.py`, `tests/test_evaluation.py`, `tests/test_features.py`, `config.yaml`, `README.md`, `CLAUDE.md` | Stage 05: grouped cross-validation of chance, majority, sample-rate-only, logistic regression on whole cuts and on windows, an LSTM and an LSTM on shuffled frames; tune `C` and the number of epochs; test-set comparison with a tape-level bootstrap and a 16 kHz robustness check, locked until `evaluate_test` is true. Includes a pilot on validation fold 0 that changed the LSTM to average its outputs and raised its learning rate to 0.003 | |
 
 ## Code adapted from external sources
 

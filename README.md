@@ -27,7 +27,7 @@ Run from the repository root with the environment active. Each stage reads only 
 | Prepare | `make prepare` | `python code/02_prepare.py` | a few seconds |
 | Features | `make features` | `python code/03_features.py` | about 10 s |
 | Unsupervised | `make unsupervised` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/04_unsupervised.ipynb` | to be measured |
-| Supervised | `make supervised` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/05_supervised.ipynb` | to be measured |
+| Supervised | `make supervised` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/05_supervised.ipynb` | about 9 min on a 16-core laptop, nearly all of it the LSTMs; a few minutes more once the test set is unlocked |
 | Figures | `make figures` | `jupyter nbconvert --to notebook --execute --output-dir results/logs/notebooks code/06_figures.ipynb` | to be measured |
 
 `make all` runs every stage in order, and `make analysis` runs the unsupervised and supervised stages. `make test` runs the tests and `make lint` runs ruff.
@@ -60,6 +60,28 @@ Stage 03 makes these choices, all set in `config.yaml`:
 - Each cut is also summarised by the mean and standard deviation of those 26 numbers over all its frames (52 numbers per cut). The logistic regression and the clustering use these.
 
 Nothing is standardised at this stage: scalers are fitted later, on training data only.
+
+## How the models are compared
+
+Stage 05 compares seven models, with settings in `config.yaml`:
+
+| Model | What it sees |
+|---|---|
+| Chance | nothing: a uniformly random guess |
+| Majority class | nothing: always the most common training species |
+| Sample rate only | the native sample rate of the recording, nothing about the sound |
+| Logistic regression (whole cuts) | mean and standard deviation of each MFCC and delta over the whole cut |
+| Logistic regression (windows) | the same statistics over each 3 s window; a cut's windows are averaged |
+| LSTM (shuffled frames) | the frames of each 3 s window, in random order |
+| LSTM | the frames of each 3 s window, in order |
+
+- **Scoring.** Every model is scored by grouped 5-fold cross-validation on the training set. The out-of-fold predictions of all 1,113 training cuts are pooled, and macro-F1 (the plain average of each species' F1 score) is the main score, so every species counts equally.
+- **Weights.** Training gives every species the same total weight. For the models that read windows, every cut also counts once, however long it is, so the three 20-minute sperm whale cuts do not dominate.
+- **Windows.** Each LSTM epoch shows the model one randomly placed 3 s window of every training cut; cuts shorter than 3 s are used whole. A cut's prediction averages all its windows, taken every 1.5 s.
+- **LSTM design.** The classifier reads the average of the LSTM's outputs over the window. That averaging and the learning rate of 0.003 were chosen in a pilot on validation fold 0, because the first design (last output only, learning rate 0.001) was still far from converged after 80 epochs.
+- **Tuning.** One setting per model is tuned on the pooled cross-validated macro-F1: `C` for the logistic regressions (0.01 to 10) and the number of epochs for the LSTMs (1 to 40). The window length is fixed at 3 s rather than tuned, to keep the stage within minutes.
+- **Order.** The shuffled LSTM is the same model, with the same seed, as the LSTM, but the frames in each window are put in random order. The gap between the two measures what order adds beyond the roughly 40 ms that each frame's deltas already describe.
+- **Test set.** It is used once, when `evaluation.evaluate_test` is set to true. Gaps in macro-F1 get a 95% bootstrap interval that resamples whole test tapes, and the comparison is repeated on the cuts recorded at 16 kHz or above.
 
 ## Data source and licence
 
