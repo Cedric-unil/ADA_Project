@@ -1,0 +1,28 @@
+{
+  "Logistic regression (whole cuts)": {
+    "C": 1.0
+  },
+  "Logistic regression (windows)": {
+    "C": 10.0
+  },
+  "LSTM (shuffled frames)": {
+    "epochs": 33,
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ]
+  },
+  "LSTM": {
+    "epochs": 38,
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ]
+  }
+}

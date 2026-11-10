@@ -8,8 +8,11 @@ from ecoacoustics.evaluation import (
     balanced_weights,
     bootstrap_gap,
     chance_scores,
+    gap_spread,
+    gaps_by_run,
     macro_f1,
     majority_predictions,
+    scores_across_runs,
 )
 
 
@@ -57,6 +60,60 @@ def test_bootstrap_gap_is_zero_for_identical_models_and_positive_for_a_better_on
     assert better["gap"] > 0
     assert better["ci_low"] > 0
     assert better["share_a_better"] == 1.0
+
+
+def test_scores_across_runs_give_the_mean_and_spread_over_seeds() -> None:
+    y_true = np.array([0, 0, 1, 1])
+    runs = np.array([[0, 0, 1, 1], [0, 1, 1, 1], [1, 1, 1, 1]])
+    f1 = [macro_f1(y_true, run) for run in runs]
+
+    result = scores_across_runs(y_true, runs)
+
+    assert result["macro_f1"] == pytest.approx(np.mean(f1))
+    assert result["macro_f1_sd"] == pytest.approx(np.std(f1, ddof=1))
+    assert result["macro_f1_min"] == pytest.approx(min(f1))
+    assert result["macro_f1_max"] == pytest.approx(1.0)
+    assert result["accuracy"] == pytest.approx(np.mean([1.0, 0.75, 0.5]))
+    assert result["accuracy_sd"] == pytest.approx(np.std([1.0, 0.75, 0.5], ddof=1))
+
+
+def test_a_single_run_has_no_spread() -> None:
+    result = scores_across_runs(np.array([0, 1]), np.array([0, 1]))
+
+    assert result["macro_f1"] == 1.0
+    assert result["accuracy"] == 1.0
+    for key in ("macro_f1_sd", "macro_f1_min", "macro_f1_max", "accuracy_sd"):
+        assert np.isnan(result[key])
+
+
+def test_gaps_are_paired_by_run() -> None:
+    y_true = np.array([0, 0, 1, 1])
+    good, half, none = np.array([0, 0, 1, 1]), np.array([0, 1, 1, 1]), np.array([1, 1, 0, 0])
+    runs_a, runs_b = np.stack([good, half]), np.stack([half, none])
+    half_f1 = macro_f1(y_true, half)
+
+    np.testing.assert_allclose(gaps_by_run(y_true, runs_a, runs_b), [1 - half_f1, half_f1])
+    # A model with one run is compared with every run of the other.
+    np.testing.assert_allclose(gaps_by_run(y_true, runs_a, half), [1 - half_f1, 0.0])
+
+    spread = gap_spread(y_true, runs_a, runs_b)
+    assert spread["gap_sd"] == pytest.approx(np.std([1 - half_f1, half_f1], ddof=1))
+    assert spread["gap_min"] == pytest.approx(min(1 - half_f1, half_f1))
+    assert spread["gap_max"] == pytest.approx(max(1 - half_f1, half_f1))
+    assert all(np.isnan(value) for value in gap_spread(y_true, good, half).values())
+
+
+def test_bootstrap_gap_averages_over_the_runs_of_each_model() -> None:
+    y_true = np.repeat(np.arange(3), 20)
+    groups = np.repeat(np.arange(12), 5)
+    rng = np.random.default_rng(0)
+    runs = np.stack([np.where(rng.random(60) < p, y_true, (y_true + 1) % 3) for p in (0.9, 0.5)])
+
+    result = bootstrap_gap(y_true, runs, y_true, groups, 100, 0.95, np.random.default_rng(1))
+
+    expected = np.mean([macro_f1(y_true, run) for run in runs]) - 1.0
+    assert result["gap"] == pytest.approx(expected)
+    assert result["ci_low"] <= result["gap"] <= result["ci_high"]
 
 
 def test_bootstrap_keeps_whole_groups_together() -> None:

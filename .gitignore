@@ -4,7 +4,7 @@
 data/*
 !data/README.md
 
-# Generated artefacts that are not tracked. Figures and tables are tracked.
+# Generated artefacts that are not tracked. Figures, tables and results/outputs are tracked.
 results/models/*
 !results/models/.gitkeep
 results/logs/*

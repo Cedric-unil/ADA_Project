@@ -1,0 +1,19 @@
+\begin{tabular}{llrr}
+\toprule
+Model & Setting & Macro-F1 & Best epoch \\
+\midrule
+Logistic regression (whole cuts) & C = 0.01 & 0.302 & -- \\
+Logistic regression (windows) & C = 0.01 & 0.311 & -- \\
+Logistic regression (whole cuts) & C = 0.1 & 0.349 & -- \\
+Logistic regression (windows) & C = 0.1 & 0.355 & -- \\
+Logistic regression (whole cuts) & C = 1.0 & 0.383 & -- \\
+Logistic regression (windows) & C = 1.0 & 0.391 & -- \\
+Logistic regression (whole cuts) & C = 10.0 & 0.350 & -- \\
+Logistic regression (windows) & C = 10.0 & 0.376 & -- \\
+LSTM, last output & learning rate 0.001, 80 epochs & 0.301 & 41.000 \\
+LSTM, last output, shuffled frames & learning rate 0.001, 80 epochs & 0.345 & 66.000 \\
+LSTM, last output & learning rate 0.003, 50 epochs & 0.318 & 50.000 \\
+LSTM, average of outputs & learning rate 0.001, 50 epochs & 0.330 & 44.000 \\
+LSTM, average of outputs & learning rate 0.003, 50 epochs & 0.399 & 50.000 \\
+\bottomrule
+\end{tabular}

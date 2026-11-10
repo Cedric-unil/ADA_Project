@@ -1,35 +1,53 @@
 # Generated with Claude Code (Anthropic): run the pipeline stages in order.
-# Stage 02 needs a confirmed grouping key in config.yaml. Stage 05 reads the test set
-# only when evaluation.evaluate_test is true.
+# Every stage target goes through run.py, which finds the numbered stages in code/ by itself, so
+# `make all` includes any stage added there. Stage targets name stages by name, not number, so
+# they survive renumbering. Stage 02 needs a confirmed grouping key in config.yaml. Stage 05
+# reads the test set only when evaluation.evaluate_test is true.
 
 PYTHON ?= python
-NB_OUT := results/logs/notebooks
-NBCONVERT := $(PYTHON) -m jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=-1 --output-dir $(NB_OUT)
+RUN := $(PYTHON) run.py
 
 .NOTPARALLEL:
-.PHONY: all data prepare features unsupervised supervised analysis figures test lint
+.PHONY: all outdated status menu data prepare features unsupervised supervised same_period lstm_pilot analysis figures test lint
 
-all: data prepare features analysis figures
+all:
+	$(RUN) all
+
+outdated:
+	$(RUN) outdated
+
+status:
+	$(RUN) list
+
+menu:
+	$(RUN)
 
 data:
-	$(PYTHON) code/01_get_data.py
+	$(RUN) get_data
 
 prepare:
-	$(PYTHON) code/02_prepare.py
+	$(RUN) prepare
 
 features:
-	$(PYTHON) code/03_features.py
+	$(RUN) features
 
 unsupervised:
-	$(NBCONVERT) code/04_unsupervised.ipynb
+	$(RUN) unsupervised
 
 supervised:
-	$(NBCONVERT) code/05_supervised.ipynb
+	$(RUN) supervised
 
-analysis: unsupervised supervised
+same_period:
+	$(RUN) same_period
+
+lstm_pilot:
+	$(RUN) lstm_pilot
+
+analysis:
+	$(RUN) unsupervised supervised same_period lstm_pilot
 
 figures:
-	$(NBCONVERT) code/06_figures.ipynb
+	$(RUN) figures
 
 test:
 	$(PYTHON) -m pytest

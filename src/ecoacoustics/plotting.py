@@ -12,10 +12,11 @@ def save_table(
     """Save ``table`` as ``<name>.csv`` and ``<name>.tex``.
 
     The LaTeX version escapes special characters and uses booktabs rules, so the paper needs
-    ``\\usepackage{booktabs}``.
+    ``\\usepackage{booktabs}``. A missing value, such as the spread of a model with one run, is
+    blank in the CSV and ``--`` in the LaTeX.
     """
     tables_dir.mkdir(parents=True, exist_ok=True)
     table.to_csv(tables_dir / f"{name}.csv", index=False)
     table.to_latex(
-        tables_dir / f"{name}.tex", index=False, escape=True, float_format=float_format
+        tables_dir / f"{name}.tex", index=False, escape=True, float_format=float_format, na_rep="--"
     )
