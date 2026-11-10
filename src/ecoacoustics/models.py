@@ -11,6 +11,9 @@ each evaluated cut, one probability per class. Classes are numbered ``0 .. n_cla
 Training weights give every species the same total weight, which suits macro-F1.
 """
 
+import logging
+import os
+from concurrent.futures import ProcessPoolExecutor
 from typing import Any
 
 import numpy as np
@@ -20,10 +23,12 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 from torch import nn
-from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence, pad_sequence
+from torch.nn.utils.rnn import pad_sequence
 
 from ecoacoustics.evaluation import balanced_weights
 from ecoacoustics.features import cut_windows, random_window
+
+logger = logging.getLogger(__name__)
 
 
 def _all_classes(probs: np.ndarray, seen: np.ndarray, n_classes: int) -> np.ndarray:
@@ -138,13 +143,15 @@ class CallLSTM(nn.Module):
         self.use_last_output = use_last_output
 
     def forward(self, x: torch.Tensor, lengths: torch.Tensor) -> torch.Tensor:
-        # Packing makes the LSTM stop at each window's real end instead of reading the padding,
-        # and the mask leaves the padding out of the average.
-        packed = pack_padded_sequence(x, lengths, batch_first=True, enforce_sorted=False)
-        packed_outputs, (last_output, _) = self.lstm(packed)
+        # The LSTM reads forwards, so its output at a frame depends only on that frame and the
+        # ones before it: the zeros that pad a short window at its end cannot change any output
+        # up to the window's real end. The mask leaves the padding out of the average, and the
+        # last output is read at the real end. Packing the windows gives the same outputs, but
+        # PyTorch then runs a much slower LSTM on the CPU (about 5 times slower on this data).
+        outputs, _ = self.lstm(x)
         if self.use_last_output:
-            return self.classifier(self.dropout(last_output[-1]))
-        outputs, _ = pad_packed_sequence(packed_outputs, batch_first=True)
+            last_output = outputs[torch.arange(len(lengths)), lengths - 1]
+            return self.classifier(self.dropout(last_output))
         real = torch.arange(outputs.shape[1])[None, :] < lengths[:, None]
         average = (outputs * real.unsqueeze(-1)).sum(dim=1) / lengths[:, None]
         return self.classifier(self.dropout(average))
@@ -176,22 +183,43 @@ def _batch(
     return pad_sequence(tensors, batch_first=True), torch.tensor([len(w) for w in windows])
 
 
+def _prepare_windows(
+    windows: list[np.ndarray], scale: tuple[np.ndarray, np.ndarray], batch_size: int
+) -> tuple[list[tuple[torch.Tensor, torch.Tensor]], np.ndarray]:
+    """Standardise and pad the windows to predict once, in batches of windows of similar length.
+
+    The same windows are predicted after every epoch, so they are prepared only once. Sorting
+    them by length keeps the padding small. Returns the batches, and for each window in batch
+    order its position in ``windows``.
+    """
+    order = np.argsort([len(w) for w in windows], kind="stable")
+    batches = [
+        _batch([windows[i] for i in order[start : start + batch_size]], *scale)
+        for start in range(0, len(order), batch_size)
+    ]
+    return batches, order
+
+
 def _predict_cuts(
     model: CallLSTM,
-    windows: list[np.ndarray],
+    batches: list[tuple[torch.Tensor, torch.Tensor]],
+    order: np.ndarray,
     owner: np.ndarray,
     n_cuts: int,
-    scale: tuple[np.ndarray, np.ndarray],
-    batch_size: int,
 ) -> np.ndarray:
-    """Probabilities for every window, averaged over the windows of each cut."""
+    """Probabilities for every window, averaged over the windows of each cut.
+
+    ``batches`` and ``order`` come from :func:`_prepare_windows`; ``owner`` gives each window's
+    cut, in the original order of the windows.
+    """
     model.eval()
-    probs = []
     with torch.no_grad():
-        for start in range(0, len(windows), batch_size):
-            x, lengths = _batch(windows[start : start + batch_size], *scale)
-            probs.append(torch.softmax(model(x, lengths), dim=1).numpy())
-    return average_by_cut(np.vstack(probs), owner, n_cuts)
+        in_batch_order = np.vstack(
+            [torch.softmax(model(x, lengths), dim=1).numpy() for x, lengths in batches]
+        )
+    probs = np.empty_like(in_batch_order)
+    probs[order] = in_batch_order
+    return average_by_cut(probs, owner, n_cuts)
 
 
 def train_lstm(
@@ -246,6 +274,7 @@ def train_lstm(
     if shuffle_order:
         eval_windows = [shuffle_rng.permutation(w) for w in eval_windows]
     eval_owner = np.array(eval_owner)
+    eval_batches, eval_order = _prepare_windows(eval_windows, scale, settings["eval_batch_size"])
 
     history = np.empty((n_epochs, len(eval_frames), n_classes), dtype=np.float32)
     for epoch in range(n_epochs):
@@ -262,6 +291,34 @@ def train_lstm(
             loss.backward()
             optimiser.step()
         history[epoch] = _predict_cuts(
-            model, eval_windows, eval_owner, len(eval_frames), scale, settings["eval_batch_size"]
+            model, eval_batches, eval_order, eval_owner, len(eval_frames)
         )
     return history
+
+
+def parallel_jobs(settings: dict[str, Any]) -> int:
+    """How many LSTMs to train at once: ``settings["n_jobs"]``, or fewer on a smaller computer.
+
+    Each training uses ``settings["num_threads"]`` CPU threads, so no more are started than the
+    computer has CPUs for. The number only changes the speed, never the results.
+    """
+    cpus = os.process_cpu_count() or 1
+    return max(1, min(settings["n_jobs"], cpus // settings["num_threads"]))
+
+
+def train_lstms(calls: list[dict[str, Any]], settings: dict[str, Any]) -> list[np.ndarray]:
+    """Run :func:`train_lstm` once per entry of ``calls``, several at once, in separate processes.
+
+    Each entry holds the arguments of one call to :func:`train_lstm`. The trainings do not
+    depend on each other, and each one sets its own seed and number of threads, so the results
+    are the same whether they run one by one or several at once. They come back in the order of
+    ``calls``. ``settings`` is the ``lstm`` section of config.yaml, read for ``n_jobs`` and
+    ``num_threads``.
+    """
+    n_jobs = min(parallel_jobs(settings), len(calls))
+    logger.info("Training %d LSTMs, %d at a time", len(calls), n_jobs)
+    if n_jobs <= 1:
+        return [train_lstm(**call) for call in calls]
+    with ProcessPoolExecutor(max_workers=n_jobs) as pool:
+        futures = [pool.submit(train_lstm, **call) for call in calls]
+        return [future.result() for future in futures]

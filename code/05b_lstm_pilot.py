@@ -22,7 +22,12 @@ from ecoacoustics.features import (
     window_statistics,
 )
 from ecoacoustics.io import read_metadata
-from ecoacoustics.models import fit_predict_logistic, fit_predict_window_logistic, train_lstm
+from ecoacoustics.models import (
+    fit_predict_logistic,
+    fit_predict_window_logistic,
+    parallel_jobs,
+    train_lstms,
+)
 from ecoacoustics.plotting import save_table
 from ecoacoustics.utils import setup_logging
 
@@ -79,25 +84,36 @@ def main() -> None:
                 {"Model": f"Logistic regression ({name})", "Setting": f"C = {c}", "Macro-F1": f1}
             )
 
-    for variant in pilot["variants"]:
-        start = time.perf_counter()
-        settings = {
-            **lstm,
-            "learning_rate": variant["learning_rate"],
-            "use_last_output": variant["use_last_output"],
+    # The variants do not depend on each other, so they are trained at the same time.
+    calls = [
+        {
+            "train_frames": fit_frames,
+            "y_train": y[fit],
+            "eval_frames": ev_frames,
+            "n_classes": n_classes,
+            "settings": {
+                **lstm,
+                "learning_rate": variant["learning_rate"],
+                "use_last_output": variant["use_last_output"],
+            },
+            "window": window,
+            "hop": hop,
+            "n_epochs": variant["epochs"],
+            "shuffle_order": variant["shuffle_order"],
+            "seed": config["seed"],
         }
-        history = train_lstm(
-            fit_frames,
-            y[fit],
-            ev_frames,
-            n_classes,
-            settings,
-            window,
-            hop,
-            variant["epochs"],
-            variant["shuffle_order"],
-            config["seed"],
-        )
+        for variant in pilot["variants"]
+    ]
+    start = time.perf_counter()
+    histories = train_lstms(calls, lstm)
+    logger.info(
+        "Trained %d LSTM variants, %d at a time, in %.0f s",
+        len(calls),
+        min(parallel_jobs(lstm), len(calls)),
+        time.perf_counter() - start,
+    )
+
+    for variant, history in zip(pilot["variants"], histories, strict=True):
         f1 = [macro_f1(y[ev], probs.argmax(axis=1)) for probs in history]
         name = variant_name(variant)
         setting = f"learning rate {variant['learning_rate']}, {variant['epochs']} epochs"
@@ -109,14 +125,7 @@ def main() -> None:
             {"model": name, "setting": setting, "epoch": epoch + 1, "macro_f1": value}
             for epoch, value in enumerate(f1)
         ]
-        logger.info(
-            "%s, %s: best macro-F1 %.3f at epoch %d (%.0f s)",
-            name,
-            setting,
-            f1[best],
-            best + 1,
-            time.perf_counter() - start,
-        )
+        logger.info("%s, %s: best macro-F1 %.3f at epoch %d", name, setting, f1[best], best + 1)
 
     table = pd.DataFrame(rows)
     save_table(table, "lstm_pilot", resolve_path(config, "tables_dir"), "%.3f")

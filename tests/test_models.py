@@ -6,6 +6,8 @@ falls. Their mean and standard deviation are identical, so only a model that rea
 in order can tell them apart.
 """
 
+import os
+
 import numpy as np
 import pytest
 import torch
@@ -20,7 +22,9 @@ from ecoacoustics.models import (
     fit_predict_window_logistic,
     frame_scaler,
     lstm_seeds,
+    parallel_jobs,
     train_lstm,
+    train_lstms,
 )
 
 LENGTH = 30
@@ -32,6 +36,7 @@ SETTINGS = {
     "eval_batch_size": 64,
     "learning_rate": 0.01,
     "num_threads": 2,
+    "n_jobs": 2,
 }
 
 
@@ -135,6 +140,59 @@ def test_lstm_runs_on_the_configured_number_of_threads() -> None:
         assert torch.get_num_threads() == SETTINGS["num_threads"]
     finally:
         torch.set_num_threads(before)
+
+
+def test_lstms_trained_at_the_same_time_give_the_same_results_as_one_by_one() -> None:
+    train_frames, y_train = _order_task(20, seed=0)
+    eval_frames, _ = _order_task(6, seed=1)
+    calls = [
+        {
+            "train_frames": train_frames,
+            "y_train": y_train,
+            "eval_frames": eval_frames,
+            "n_classes": 2,
+            "settings": SETTINGS,
+            "window": LENGTH,
+            "hop": LENGTH,
+            "n_epochs": 2,
+            "shuffle_order": shuffle_order,
+            "seed": seed,
+        }
+        for shuffle_order in (False, True)
+        for seed in (0, 1)
+    ]
+    before = torch.get_num_threads()
+    try:
+        one_by_one = train_lstms(calls, {**SETTINGS, "n_jobs": 1})
+        at_the_same_time = train_lstms(calls, {**SETTINGS, "n_jobs": 2})
+    finally:
+        torch.set_num_threads(before)
+
+    assert len(at_the_same_time) == len(calls)
+    for alone, together in zip(one_by_one, at_the_same_time, strict=True):
+        np.testing.assert_array_equal(alone, together)
+
+
+def test_parallel_jobs_never_ask_for_more_cpus_than_there_are() -> None:
+    cpus = os.process_cpu_count() or 1
+
+    assert parallel_jobs({"n_jobs": 1, "num_threads": 1}) == 1
+    assert parallel_jobs({"n_jobs": 10 * cpus, "num_threads": 1}) == cpus
+    assert parallel_jobs({"n_jobs": 4, "num_threads": 10 * cpus}) == 1
+
+
+def test_lstm_predictions_do_not_depend_on_how_windows_are_batched() -> None:
+    # Cuts of different lengths give windows of different lengths, which are sorted by length
+    # and padded before they are predicted; the predictions must come back to the right cut.
+    train_frames, y_train = _order_task(20, seed=0)
+    rng = np.random.default_rng(2)
+    eval_frames = [rng.normal(size=(n, 1)).astype(np.float32) for n in (30, 7, 19, 3, 30, 12)]
+
+    def run(eval_batch_size: int) -> np.ndarray:
+        settings = {**SETTINGS, "eval_batch_size": eval_batch_size}
+        return train_lstm(train_frames, y_train, eval_frames, 2, settings, 10, 5, 2, False, 0)
+
+    np.testing.assert_allclose(run(1), run(64), atol=1e-6)
 
 
 def test_lstm_seeds_start_from_the_seed_in_the_config() -> None:

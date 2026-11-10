@@ -5,80 +5,80 @@ model,setting,epoch,macro_f1
 "LSTM, last output","learning rate 0.001, 80 epochs",4,0.08926120128166162
 "LSTM, last output","learning rate 0.001, 80 epochs",5,0.1767098534540395
 "LSTM, last output","learning rate 0.001, 80 epochs",6,0.13697632058287795
-"LSTM, last output","learning rate 0.001, 80 epochs",7,0.14444444444444443
-"LSTM, last output","learning rate 0.001, 80 epochs",8,0.14240362811791382
-"LSTM, last output","learning rate 0.001, 80 epochs",9,0.15625598837017213
-"LSTM, last output","learning rate 0.001, 80 epochs",10,0.17030485854015265
-"LSTM, last output","learning rate 0.001, 80 epochs",11,0.16089274709964363
-"LSTM, last output","learning rate 0.001, 80 epochs",12,0.18885521885521886
-"LSTM, last output","learning rate 0.001, 80 epochs",13,0.17843180973615755
-"LSTM, last output","learning rate 0.001, 80 epochs",14,0.19742479742479743
-"LSTM, last output","learning rate 0.001, 80 epochs",15,0.19156187727616297
-"LSTM, last output","learning rate 0.001, 80 epochs",16,0.16509653868144436
-"LSTM, last output","learning rate 0.001, 80 epochs",17,0.14630008525149188
-"LSTM, last output","learning rate 0.001, 80 epochs",18,0.22993635457403575
-"LSTM, last output","learning rate 0.001, 80 epochs",19,0.19904509283819627
-"LSTM, last output","learning rate 0.001, 80 epochs",20,0.21667373562110404
-"LSTM, last output","learning rate 0.001, 80 epochs",21,0.22913360009896486
-"LSTM, last output","learning rate 0.001, 80 epochs",22,0.209853431592562
-"LSTM, last output","learning rate 0.001, 80 epochs",23,0.2272018223889097
-"LSTM, last output","learning rate 0.001, 80 epochs",24,0.23515475153393903
-"LSTM, last output","learning rate 0.001, 80 epochs",25,0.2212864357864358
-"LSTM, last output","learning rate 0.001, 80 epochs",26,0.14418229481750353
-"LSTM, last output","learning rate 0.001, 80 epochs",27,0.16555204092729447
-"LSTM, last output","learning rate 0.001, 80 epochs",28,0.25913197913197916
-"LSTM, last output","learning rate 0.001, 80 epochs",29,0.2683007125585836
-"LSTM, last output","learning rate 0.001, 80 epochs",30,0.27260753135753135
-"LSTM, last output","learning rate 0.001, 80 epochs",31,0.2895826060039165
-"LSTM, last output","learning rate 0.001, 80 epochs",32,0.27969263801147864
-"LSTM, last output","learning rate 0.001, 80 epochs",33,0.2553996296682864
-"LSTM, last output","learning rate 0.001, 80 epochs",34,0.2598858723596355
-"LSTM, last output","learning rate 0.001, 80 epochs",35,0.2501285253973426
-"LSTM, last output","learning rate 0.001, 80 epochs",36,0.2671837386080621
-"LSTM, last output","learning rate 0.001, 80 epochs",37,0.2542991044043676
-"LSTM, last output","learning rate 0.001, 80 epochs",38,0.23075962325962326
-"LSTM, last output","learning rate 0.001, 80 epochs",39,0.24138709499365235
-"LSTM, last output","learning rate 0.001, 80 epochs",40,0.2471444604777938
-"LSTM, last output","learning rate 0.001, 80 epochs",41,0.2426531323083047
-"LSTM, last output","learning rate 0.001, 80 epochs",42,0.24225108225108224
-"LSTM, last output","learning rate 0.001, 80 epochs",43,0.27900617900617897
-"LSTM, last output","learning rate 0.001, 80 epochs",44,0.27244300144300143
-"LSTM, last output","learning rate 0.001, 80 epochs",45,0.25176255464989145
-"LSTM, last output","learning rate 0.001, 80 epochs",46,0.23235690235690235
-"LSTM, last output","learning rate 0.001, 80 epochs",47,0.1933212778782399
-"LSTM, last output","learning rate 0.001, 80 epochs",48,0.26195582195582195
-"LSTM, last output","learning rate 0.001, 80 epochs",49,0.2473211996122213
-"LSTM, last output","learning rate 0.001, 80 epochs",50,0.23815703000776706
-"LSTM, last output","learning rate 0.001, 80 epochs",51,0.2325062097830977
-"LSTM, last output","learning rate 0.001, 80 epochs",52,0.24846552520824747
-"LSTM, last output","learning rate 0.001, 80 epochs",53,0.28039682539682537
-"LSTM, last output","learning rate 0.001, 80 epochs",54,0.2868004480354401
-"LSTM, last output","learning rate 0.001, 80 epochs",55,0.24773879142300193
-"LSTM, last output","learning rate 0.001, 80 epochs",56,0.2524867091972355
-"LSTM, last output","learning rate 0.001, 80 epochs",57,0.2537516339869281
-"LSTM, last output","learning rate 0.001, 80 epochs",58,0.25455811467075545
-"LSTM, last output","learning rate 0.001, 80 epochs",59,0.2393666301019242
-"LSTM, last output","learning rate 0.001, 80 epochs",60,0.23937710437710435
-"LSTM, last output","learning rate 0.001, 80 epochs",61,0.2520476231131059
-"LSTM, last output","learning rate 0.001, 80 epochs",62,0.2398028254065406
-"LSTM, last output","learning rate 0.001, 80 epochs",63,0.2429927343611554
-"LSTM, last output","learning rate 0.001, 80 epochs",64,0.25330724514785236
-"LSTM, last output","learning rate 0.001, 80 epochs",65,0.249621141287808
-"LSTM, last output","learning rate 0.001, 80 epochs",66,0.22777312777312778
-"LSTM, last output","learning rate 0.001, 80 epochs",67,0.2615698437740358
-"LSTM, last output","learning rate 0.001, 80 epochs",68,0.2589833048523393
-"LSTM, last output","learning rate 0.001, 80 epochs",69,0.26536123942892514
-"LSTM, last output","learning rate 0.001, 80 epochs",70,0.25885711333281664
-"LSTM, last output","learning rate 0.001, 80 epochs",71,0.25903821742399036
-"LSTM, last output","learning rate 0.001, 80 epochs",72,0.27366607248960195
-"LSTM, last output","learning rate 0.001, 80 epochs",73,0.27793861665115827
-"LSTM, last output","learning rate 0.001, 80 epochs",74,0.2605291005291005
-"LSTM, last output","learning rate 0.001, 80 epochs",75,0.2746836624422831
-"LSTM, last output","learning rate 0.001, 80 epochs",76,0.29239745018128643
-"LSTM, last output","learning rate 0.001, 80 epochs",77,0.2999432968152074
-"LSTM, last output","learning rate 0.001, 80 epochs",78,0.3071845621135682
-"LSTM, last output","learning rate 0.001, 80 epochs",79,0.30433919022154315
-"LSTM, last output","learning rate 0.001, 80 epochs",80,0.3089566395663957
+"LSTM, last output","learning rate 0.001, 80 epochs",7,0.14367971210076474
+"LSTM, last output","learning rate 0.001, 80 epochs",8,0.13863313990973566
+"LSTM, last output","learning rate 0.001, 80 epochs",9,0.1259259259259259
+"LSTM, last output","learning rate 0.001, 80 epochs",10,0.12978872169022646
+"LSTM, last output","learning rate 0.001, 80 epochs",11,0.16439856439856443
+"LSTM, last output","learning rate 0.001, 80 epochs",12,0.1755056055056055
+"LSTM, last output","learning rate 0.001, 80 epochs",13,0.17485068603712672
+"LSTM, last output","learning rate 0.001, 80 epochs",14,0.15891690009337064
+"LSTM, last output","learning rate 0.001, 80 epochs",15,0.19388070042831948
+"LSTM, last output","learning rate 0.001, 80 epochs",16,0.19483014048531286
+"LSTM, last output","learning rate 0.001, 80 epochs",17,0.1756950146627566
+"LSTM, last output","learning rate 0.001, 80 epochs",18,0.1667894474863116
+"LSTM, last output","learning rate 0.001, 80 epochs",19,0.1559525164030796
+"LSTM, last output","learning rate 0.001, 80 epochs",20,0.17555555555555555
+"LSTM, last output","learning rate 0.001, 80 epochs",21,0.19022100706311232
+"LSTM, last output","learning rate 0.001, 80 epochs",22,0.19013305468477884
+"LSTM, last output","learning rate 0.001, 80 epochs",23,0.23405955967359476
+"LSTM, last output","learning rate 0.001, 80 epochs",24,0.22395752395752397
+"LSTM, last output","learning rate 0.001, 80 epochs",25,0.21419191919191918
+"LSTM, last output","learning rate 0.001, 80 epochs",26,0.22014046072017085
+"LSTM, last output","learning rate 0.001, 80 epochs",27,0.2219832735961768
+"LSTM, last output","learning rate 0.001, 80 epochs",28,0.2222425722425722
+"LSTM, last output","learning rate 0.001, 80 epochs",29,0.23427689140504374
+"LSTM, last output","learning rate 0.001, 80 epochs",30,0.22384313725490199
+"LSTM, last output","learning rate 0.001, 80 epochs",31,0.2617760983128187
+"LSTM, last output","learning rate 0.001, 80 epochs",32,0.2508616873322756
+"LSTM, last output","learning rate 0.001, 80 epochs",33,0.2736053671537542
+"LSTM, last output","learning rate 0.001, 80 epochs",34,0.2519023569023569
+"LSTM, last output","learning rate 0.001, 80 epochs",35,0.27274007038712916
+"LSTM, last output","learning rate 0.001, 80 epochs",36,0.2874252122817403
+"LSTM, last output","learning rate 0.001, 80 epochs",37,0.2829303344310357
+"LSTM, last output","learning rate 0.001, 80 epochs",38,0.28878013115415135
+"LSTM, last output","learning rate 0.001, 80 epochs",39,0.26443650793650797
+"LSTM, last output","learning rate 0.001, 80 epochs",40,0.2837841945288754
+"LSTM, last output","learning rate 0.001, 80 epochs",41,0.30098421759293575
+"LSTM, last output","learning rate 0.001, 80 epochs",42,0.15063492063492062
+"LSTM, last output","learning rate 0.001, 80 epochs",43,0.19757681506492197
+"LSTM, last output","learning rate 0.001, 80 epochs",44,0.18239044905711574
+"LSTM, last output","learning rate 0.001, 80 epochs",45,0.19063159063159066
+"LSTM, last output","learning rate 0.001, 80 epochs",46,0.23803996674260672
+"LSTM, last output","learning rate 0.001, 80 epochs",47,0.26808549150654415
+"LSTM, last output","learning rate 0.001, 80 epochs",48,0.2563543131846077
+"LSTM, last output","learning rate 0.001, 80 epochs",49,0.18739934185056137
+"LSTM, last output","learning rate 0.001, 80 epochs",50,0.2364676583854666
+"LSTM, last output","learning rate 0.001, 80 epochs",51,0.22811539846540108
+"LSTM, last output","learning rate 0.001, 80 epochs",52,0.19720855976175128
+"LSTM, last output","learning rate 0.001, 80 epochs",53,0.1997109533793705
+"LSTM, last output","learning rate 0.001, 80 epochs",54,0.18645964508033472
+"LSTM, last output","learning rate 0.001, 80 epochs",55,0.20340936811525046
+"LSTM, last output","learning rate 0.001, 80 epochs",56,0.20005743109622962
+"LSTM, last output","learning rate 0.001, 80 epochs",57,0.1984271937213114
+"LSTM, last output","learning rate 0.001, 80 epochs",58,0.21571958513134984
+"LSTM, last output","learning rate 0.001, 80 epochs",59,0.19790876849700378
+"LSTM, last output","learning rate 0.001, 80 epochs",60,0.2005204991087344
+"LSTM, last output","learning rate 0.001, 80 epochs",61,0.22222679281502813
+"LSTM, last output","learning rate 0.001, 80 epochs",62,0.22656232656232655
+"LSTM, last output","learning rate 0.001, 80 epochs",63,0.20460241512873092
+"LSTM, last output","learning rate 0.001, 80 epochs",64,0.1949977507872245
+"LSTM, last output","learning rate 0.001, 80 epochs",65,0.20523061761451852
+"LSTM, last output","learning rate 0.001, 80 epochs",66,0.22109616383300595
+"LSTM, last output","learning rate 0.001, 80 epochs",67,0.2217960904715202
+"LSTM, last output","learning rate 0.001, 80 epochs",68,0.2329223701614114
+"LSTM, last output","learning rate 0.001, 80 epochs",69,0.22219260271891852
+"LSTM, last output","learning rate 0.001, 80 epochs",70,0.2372173252066999
+"LSTM, last output","learning rate 0.001, 80 epochs",71,0.2389110029976903
+"LSTM, last output","learning rate 0.001, 80 epochs",72,0.24744001323250736
+"LSTM, last output","learning rate 0.001, 80 epochs",73,0.2554103122730574
+"LSTM, last output","learning rate 0.001, 80 epochs",74,0.24594412915784206
+"LSTM, last output","learning rate 0.001, 80 epochs",75,0.2328150861484195
+"LSTM, last output","learning rate 0.001, 80 epochs",76,0.2441760601180891
+"LSTM, last output","learning rate 0.001, 80 epochs",77,0.25925500941220103
+"LSTM, last output","learning rate 0.001, 80 epochs",78,0.26171093422706326
+"LSTM, last output","learning rate 0.001, 80 epochs",79,0.28387904328008273
+"LSTM, last output","learning rate 0.001, 80 epochs",80,0.24296175855490212
 "LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",1,0.08639070442992011
 "LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",2,0.10315186387150405
 "LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",3,0.07458363747724164
@@ -86,129 +86,129 @@ model,setting,epoch,macro_f1
 "LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",5,0.16496493688639552
 "LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",6,0.18717299578059074
 "LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",7,0.17292929292929296
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",8,0.17136333985649055
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",9,0.18752598752598754
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",10,0.19814814814814816
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",11,0.1970829033367733
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",12,0.16190476190476188
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",13,0.17111456176673567
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",14,0.16194625998547568
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",15,0.19779677113010447
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",16,0.20371494834492937
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",17,0.15763974587504
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",18,0.17773797084141912
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",19,0.15194218608852755
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",20,0.14624907612712493
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",21,0.16846712741449582
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",22,0.1674761526820703
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",23,0.1674185463659148
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",24,0.1609913200581281
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",25,0.15349699945444628
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",26,0.16700902583255525
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",27,0.15405891825329165
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",28,0.12484993997599039
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",29,0.18575407494844837
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",30,0.18609916720314665
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",31,0.1950793650793651
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",32,0.19837344028520498
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",33,0.19139110880470508
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",34,0.19756410256410256
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",35,0.21623791278963692
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",36,0.2520009054126702
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",37,0.2598188784395681
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",38,0.24865062404474642
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",39,0.22781788472964945
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",40,0.2513034425891568
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",41,0.23679516250944824
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",42,0.257158312122314
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",43,0.2650877474402431
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",44,0.27797606982479056
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",45,0.26542146612322054
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",46,0.21786528657314813
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",47,0.27080129746796416
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",48,0.3023337049424006
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",49,0.3085761430922721
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",50,0.24571528611444576
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",51,0.2431181181181181
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",52,0.21599553059654927
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",53,0.25631610853296544
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",54,0.25587203205975306
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",55,0.2700786657443004
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",56,0.24525684917841778
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",57,0.27836364846375966
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",58,0.2825363163406642
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",59,0.29460471045376707
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",60,0.28912695827396373
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",61,0.2788510076411888
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",62,0.29608553238967394
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",63,0.29993752977882304
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",64,0.2887691596949071
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",65,0.30315103934648524
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",66,0.30043290043290044
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",67,0.28811118986882167
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",68,0.27389763568262554
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",69,0.28531884318978257
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",70,0.2853352286188107
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",71,0.271378155894285
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",72,0.2532785841609371
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",73,0.2715483663821259
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",74,0.28794607886902657
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",75,0.29221794734582457
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",76,0.30804554079696395
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",77,0.29099473099473094
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",78,0.3167391386746226
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",79,0.2893911350463075
-"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",80,0.20197858542350328
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",8,0.1716931216931217
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",9,0.1846153846153846
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",10,0.18809523809523812
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",11,0.18949140528087896
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",12,0.1598394495412844
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",13,0.15663460170502425
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",14,0.18295454545454545
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",15,0.15408735239721155
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",16,0.17801570920765966
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",17,0.17803383138152287
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",18,0.14090909090909093
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",19,0.1542037890424987
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",20,0.17990157510683263
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",21,0.17310299763129952
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",22,0.17393650793650794
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",23,0.1869602936269603
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",24,0.1823706059000177
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",25,0.17434969853574506
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",26,0.19498546352766302
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",27,0.2242947118241236
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",28,0.25895417052350483
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",29,0.18666666666666665
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",30,0.2122558399732313
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",31,0.24561395126612517
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",32,0.254990990990991
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",33,0.2585687237251693
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",34,0.2651417770967996
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",35,0.2565368406815375
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",36,0.19855768991722977
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",37,0.18313818924438394
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",38,0.2253426927957833
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",39,0.2503229869545659
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",40,0.2523683213338386
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",41,0.26337738663080335
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",42,0.2683350948882334
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",43,0.26968809819384537
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",44,0.2877669547040744
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",45,0.275851803563668
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",46,0.2765792125212415
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",47,0.27164122268957525
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",48,0.26471729866038807
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",49,0.28829598506069093
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",50,0.2993865533491906
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",51,0.27093072545902736
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",52,0.2637936386443849
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",53,0.2662699767962547
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",54,0.2971249550235058
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",55,0.30924083842732153
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",56,0.29112289018171367
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",57,0.28640130240130246
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",58,0.3324645726476503
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",59,0.32353898921301294
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",60,0.3235166184121672
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",61,0.2908631265061286
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",62,0.3262016164894763
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",63,0.32413609183251196
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",64,0.31540868584888665
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",65,0.32742561906940765
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",66,0.34473314503796887
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",67,0.29506395150652853
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",68,0.2852585574590279
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",69,0.2692732926668055
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",70,0.2907752333736448
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",71,0.3085113343689268
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",72,0.29911470276126656
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",73,0.29528375006635876
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",74,0.29939258752638626
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",75,0.31184155193235874
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",76,0.30322463153370205
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",77,0.3031084094498729
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",78,0.2779286828324055
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",79,0.3353966362739144
+"LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",80,0.3081046412080895
 "LSTM, last output","learning rate 0.003, 50 epochs",1,0.07676113360323886
 "LSTM, last output","learning rate 0.003, 50 epochs",2,0.16203296703296702
 "LSTM, last output","learning rate 0.003, 50 epochs",3,0.13864468864468865
-"LSTM, last output","learning rate 0.003, 50 epochs",4,0.15716064757160647
-"LSTM, last output","learning rate 0.003, 50 epochs",5,0.1262429095762429
-"LSTM, last output","learning rate 0.003, 50 epochs",6,0.11161387631975868
-"LSTM, last output","learning rate 0.003, 50 epochs",7,0.1990845168893949
-"LSTM, last output","learning rate 0.003, 50 epochs",8,0.20958273208273207
-"LSTM, last output","learning rate 0.003, 50 epochs",9,0.22594153270845
-"LSTM, last output","learning rate 0.003, 50 epochs",10,0.1572166105499439
-"LSTM, last output","learning rate 0.003, 50 epochs",11,0.1823242027915678
-"LSTM, last output","learning rate 0.003, 50 epochs",12,0.244310007200393
-"LSTM, last output","learning rate 0.003, 50 epochs",13,0.1973214438237756
-"LSTM, last output","learning rate 0.003, 50 epochs",14,0.1942296133039471
-"LSTM, last output","learning rate 0.003, 50 epochs",15,0.2316923076923077
-"LSTM, last output","learning rate 0.003, 50 epochs",16,0.21938020256206617
-"LSTM, last output","learning rate 0.003, 50 epochs",17,0.2138559218559219
-"LSTM, last output","learning rate 0.003, 50 epochs",18,0.24002338913966823
-"LSTM, last output","learning rate 0.003, 50 epochs",19,0.23678945450412658
-"LSTM, last output","learning rate 0.003, 50 epochs",20,0.2734075573549258
-"LSTM, last output","learning rate 0.003, 50 epochs",21,0.24661977652543687
-"LSTM, last output","learning rate 0.003, 50 epochs",22,0.27689955844048947
-"LSTM, last output","learning rate 0.003, 50 epochs",23,0.22450727604714213
-"LSTM, last output","learning rate 0.003, 50 epochs",24,0.24403177965130404
-"LSTM, last output","learning rate 0.003, 50 epochs",25,0.2595482603815937
-"LSTM, last output","learning rate 0.003, 50 epochs",26,0.2557409989978139
-"LSTM, last output","learning rate 0.003, 50 epochs",27,0.2717445692445693
-"LSTM, last output","learning rate 0.003, 50 epochs",28,0.2693762718844296
-"LSTM, last output","learning rate 0.003, 50 epochs",29,0.23133340733340735
-"LSTM, last output","learning rate 0.003, 50 epochs",30,0.2689865234324878
-"LSTM, last output","learning rate 0.003, 50 epochs",31,0.2871164269335001
-"LSTM, last output","learning rate 0.003, 50 epochs",32,0.2853611530082118
-"LSTM, last output","learning rate 0.003, 50 epochs",33,0.26585161964472304
-"LSTM, last output","learning rate 0.003, 50 epochs",34,0.2742836242836243
-"LSTM, last output","learning rate 0.003, 50 epochs",35,0.2527261655650402
-"LSTM, last output","learning rate 0.003, 50 epochs",36,0.24777960051644263
-"LSTM, last output","learning rate 0.003, 50 epochs",37,0.22503663003663005
-"LSTM, last output","learning rate 0.003, 50 epochs",38,0.23874726702796872
-"LSTM, last output","learning rate 0.003, 50 epochs",39,0.25938271604938273
-"LSTM, last output","learning rate 0.003, 50 epochs",40,0.2610839684711094
-"LSTM, last output","learning rate 0.003, 50 epochs",41,0.2543444114836305
-"LSTM, last output","learning rate 0.003, 50 epochs",42,0.2565657896013428
-"LSTM, last output","learning rate 0.003, 50 epochs",43,0.2371497402379755
-"LSTM, last output","learning rate 0.003, 50 epochs",44,0.24478055155604153
-"LSTM, last output","learning rate 0.003, 50 epochs",45,0.25993771190545384
-"LSTM, last output","learning rate 0.003, 50 epochs",46,0.2776992298219919
-"LSTM, last output","learning rate 0.003, 50 epochs",47,0.2683456907729354
-"LSTM, last output","learning rate 0.003, 50 epochs",48,0.2502018678489267
-"LSTM, last output","learning rate 0.003, 50 epochs",49,0.23438725203431082
-"LSTM, last output","learning rate 0.003, 50 epochs",50,0.25826345697313435
+"LSTM, last output","learning rate 0.003, 50 epochs",4,0.16577114427860698
+"LSTM, last output","learning rate 0.003, 50 epochs",5,0.1490058479532164
+"LSTM, last output","learning rate 0.003, 50 epochs",6,0.11986531986531987
+"LSTM, last output","learning rate 0.003, 50 epochs",7,0.1787301587301587
+"LSTM, last output","learning rate 0.003, 50 epochs",8,0.1792709705753184
+"LSTM, last output","learning rate 0.003, 50 epochs",9,0.12541147266742214
+"LSTM, last output","learning rate 0.003, 50 epochs",10,0.23509495298106173
+"LSTM, last output","learning rate 0.003, 50 epochs",11,0.21035038022726119
+"LSTM, last output","learning rate 0.003, 50 epochs",12,0.14152591204137593
+"LSTM, last output","learning rate 0.003, 50 epochs",13,0.1632658934484492
+"LSTM, last output","learning rate 0.003, 50 epochs",14,0.19134721487662662
+"LSTM, last output","learning rate 0.003, 50 epochs",15,0.22473813767931414
+"LSTM, last output","learning rate 0.003, 50 epochs",16,0.19802177281168876
+"LSTM, last output","learning rate 0.003, 50 epochs",17,0.23487037037037037
+"LSTM, last output","learning rate 0.003, 50 epochs",18,0.29393916938156567
+"LSTM, last output","learning rate 0.003, 50 epochs",19,0.2942432709483019
+"LSTM, last output","learning rate 0.003, 50 epochs",20,0.2716067828022287
+"LSTM, last output","learning rate 0.003, 50 epochs",21,0.26474838474838475
+"LSTM, last output","learning rate 0.003, 50 epochs",22,0.22508593937900734
+"LSTM, last output","learning rate 0.003, 50 epochs",23,0.24936277892799633
+"LSTM, last output","learning rate 0.003, 50 epochs",24,0.16946337167333647
+"LSTM, last output","learning rate 0.003, 50 epochs",25,0.22008533977087436
+"LSTM, last output","learning rate 0.003, 50 epochs",26,0.25952244762425036
+"LSTM, last output","learning rate 0.003, 50 epochs",27,0.2556704782268692
+"LSTM, last output","learning rate 0.003, 50 epochs",28,0.23947200117889772
+"LSTM, last output","learning rate 0.003, 50 epochs",29,0.2164338465687791
+"LSTM, last output","learning rate 0.003, 50 epochs",30,0.23399171729095
+"LSTM, last output","learning rate 0.003, 50 epochs",31,0.2404659962233557
+"LSTM, last output","learning rate 0.003, 50 epochs",32,0.24878947563158088
+"LSTM, last output","learning rate 0.003, 50 epochs",33,0.24937549378725848
+"LSTM, last output","learning rate 0.003, 50 epochs",34,0.23284373034373032
+"LSTM, last output","learning rate 0.003, 50 epochs",35,0.2559967666212701
+"LSTM, last output","learning rate 0.003, 50 epochs",36,0.26046485443178435
+"LSTM, last output","learning rate 0.003, 50 epochs",37,0.2794239331512402
+"LSTM, last output","learning rate 0.003, 50 epochs",38,0.27000777000777
+"LSTM, last output","learning rate 0.003, 50 epochs",39,0.30343830110433523
+"LSTM, last output","learning rate 0.003, 50 epochs",40,0.2692631145192898
+"LSTM, last output","learning rate 0.003, 50 epochs",41,0.2427852279992498
+"LSTM, last output","learning rate 0.003, 50 epochs",42,0.2785356240577867
+"LSTM, last output","learning rate 0.003, 50 epochs",43,0.2738342958221255
+"LSTM, last output","learning rate 0.003, 50 epochs",44,0.2877133977133977
+"LSTM, last output","learning rate 0.003, 50 epochs",45,0.27776222401609396
+"LSTM, last output","learning rate 0.003, 50 epochs",46,0.27160455486542445
+"LSTM, last output","learning rate 0.003, 50 epochs",47,0.2736697289638466
+"LSTM, last output","learning rate 0.003, 50 epochs",48,0.2840070088641517
+"LSTM, last output","learning rate 0.003, 50 epochs",49,0.3015387729848172
+"LSTM, last output","learning rate 0.003, 50 epochs",50,0.317825311942959
 "LSTM, average of outputs","learning rate 0.001, 50 epochs",1,0.10750918305667923
 "LSTM, average of outputs","learning rate 0.001, 50 epochs",2,0.08044103001849481
 "LSTM, average of outputs","learning rate 0.001, 50 epochs",3,0.06976242950304593
@@ -216,96 +216,96 @@ model,setting,epoch,macro_f1
 "LSTM, average of outputs","learning rate 0.001, 50 epochs",5,0.15395162729056758
 "LSTM, average of outputs","learning rate 0.001, 50 epochs",6,0.18602495543672012
 "LSTM, average of outputs","learning rate 0.001, 50 epochs",7,0.17932263814616756
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",8,0.1903030303030303
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",9,0.20132148553201185
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",10,0.19701754385964912
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",11,0.2226434759950492
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",12,0.20207636207636206
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",13,0.24326797385620919
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",14,0.24936507936507937
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",15,0.22597692522535057
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",16,0.2014734950584007
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",17,0.27545711786798377
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",18,0.29733416445898914
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",19,0.2582804232804233
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",20,0.2686827956989247
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",21,0.26160067574701723
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",22,0.28013298554062227
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",23,0.2729905295451514
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",24,0.3415142308165564
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",25,0.2610379435379435
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",26,0.25807017543859645
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",27,0.27876388006002445
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",28,0.2837280801986684
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",29,0.29597136781347305
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",30,0.3048987094148385
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",31,0.31231410645618296
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",32,0.3093246187363834
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",33,0.30050412692501793
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",34,0.2835545406973978
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",35,0.31229437229437224
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",36,0.3184743579378554
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",37,0.33803993855606757
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",38,0.3208878648233487
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",39,0.33966594381228526
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",40,0.19756706096352966
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",41,0.2132191429705463
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",42,0.23751225162612494
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",43,0.2856779524943578
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",44,0.306547619047619
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",45,0.2980194431948818
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",46,0.28949935482813544
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",47,0.288472832427065
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",48,0.3018243064642745
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",49,0.3128623103623103
-"LSTM, average of outputs","learning rate 0.001, 50 epochs",50,0.31287829817241586
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",8,0.19480225988700567
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",9,0.20054956668780383
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",10,0.21730994152046784
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",11,0.22527918458353238
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",12,0.22424242424242422
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",13,0.1779032318719586
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",14,0.20358974358974358
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",15,0.23199772662688262
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",16,0.20120067577373077
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",17,0.2414814814814815
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",18,0.23092936049457788
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",19,0.2674180474180474
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",20,0.22133966782460324
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",21,0.21561253561253563
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",22,0.2636150234741784
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",23,0.24464500436449946
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",24,0.24695156695156698
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",25,0.18845025417574437
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",26,0.166444651045095
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",27,0.20717893217893218
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",28,0.25315420320300447
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",29,0.24806200335612102
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",30,0.25989657401422106
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",31,0.2565623265623265
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",32,0.24552618921039973
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",33,0.24947625643277818
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",34,0.24588818399560086
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",35,0.2452649746767394
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",36,0.2499801940978412
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",37,0.2423585408835628
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",38,0.291748814893469
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",39,0.2838506998740916
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",40,0.2699086099086099
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",41,0.30903185173440445
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",42,0.2939455544455544
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",43,0.2819938515590689
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",44,0.32954616410680676
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",45,0.3293887295945184
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",46,0.32746623093681915
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",47,0.3176436635260165
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",48,0.3099145299145299
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",49,0.306984864121087
+"LSTM, average of outputs","learning rate 0.001, 50 epochs",50,0.3110913759443171
 "LSTM, average of outputs","learning rate 0.003, 50 epochs",1,0.13561049666993025
 "LSTM, average of outputs","learning rate 0.003, 50 epochs",2,0.17979218294856744
 "LSTM, average of outputs","learning rate 0.003, 50 epochs",3,0.16839973852457707
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",4,0.1714285714285714
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",5,0.20565503713044694
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",6,0.18663753282349108
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",7,0.2759011037271907
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",8,0.25909805517648654
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",9,0.3341867095838424
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",10,0.3134595034595034
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",11,0.2552980352980353
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",12,0.27406572916870403
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",13,0.3090091561339808
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",14,0.3055362508781562
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",15,0.3001463899331004
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",16,0.28555440999376924
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",17,0.2217672678198994
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",18,0.32268176268176263
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",19,0.29026148004871405
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",20,0.3113455759632672
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",21,0.33250473302086203
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",22,0.3688507796563253
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",23,0.3634908407896914
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",24,0.3349593979005744
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",25,0.3765577938117474
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",26,0.3954238289326008
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",27,0.3638039159607787
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",28,0.38166714264600804
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",29,0.3465625896523831
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",30,0.36637744435543657
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",31,0.3210626321110192
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",32,0.34365659882901256
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",33,0.337707424850282
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",34,0.3346828023825858
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",35,0.3130845617077501
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",36,0.34641160235363133
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",37,0.35565397963247425
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",38,0.3293044808069612
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",39,0.33443805272841315
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",40,0.3411217168446357
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",41,0.36546999959404053
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",42,0.3319115232299817
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",43,0.30289870381373646
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",44,0.3080867740734913
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",45,0.3357230383459892
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",46,0.2884315120249784
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",47,0.3600787709023004
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",48,0.3498179456653441
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",49,0.3545142468564629
-"LSTM, average of outputs","learning rate 0.003, 50 epochs",50,0.35701357466063344
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",4,0.16885106382978723
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",5,0.18650544857441406
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",6,0.22420506732308576
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",7,0.2623015873015873
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",8,0.2686437928543191
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",9,0.1854732590710703
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",10,0.2577277167277167
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",11,0.30460321995805867
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",12,0.29340331114524665
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",13,0.3018918150352433
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",14,0.26675351160727717
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",15,0.27907114360895874
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",16,0.2733872164985722
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",17,0.3124250101937729
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",18,0.3455002063521333
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",19,0.3481934731934732
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",20,0.3486048965040562
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",21,0.34602463532692845
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",22,0.2703218614939509
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",23,0.3328820236367406
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",24,0.32069712717768545
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",25,0.3274510932942128
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",26,0.3259654717487535
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",27,0.333292589763178
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",28,0.32717384667849064
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",29,0.31406435395392607
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",30,0.2875043619161266
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",31,0.3182252388134741
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",32,0.33766604084883656
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",33,0.36337783561467774
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",34,0.34018257708475097
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",35,0.34454738900391074
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",36,0.33113350569872313
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",37,0.35740137257378635
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",38,0.3782862954905387
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",39,0.3755291309857259
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",40,0.35963746528262663
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",41,0.3709904108660655
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",42,0.3638636660268539
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",43,0.35470201379764016
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",44,0.3445488678842189
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",45,0.3568650545996084
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",46,0.2540555406092129
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",47,0.30822901395788554
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",48,0.3659229011225381
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",49,0.3542837577418606
+"LSTM, average of outputs","learning rate 0.003, 50 epochs",50,0.39936469146146564

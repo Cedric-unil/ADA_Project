@@ -6,7 +6,7 @@
     "C": 10.0
   },
   "LSTM (shuffled frames)": {
-    "epochs": 38,
+    "epochs": 33,
     "seeds": [
       42,
       43,
@@ -16,7 +16,7 @@
     ]
   },
   "LSTM": {
-    "epochs": 32,
+    "epochs": 38,
     "seeds": [
       42,
       43,
