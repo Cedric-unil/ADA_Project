@@ -1,7 +1,7 @@
 # Generated with Claude Code (Anthropic): run the real stages twice on a reduced configuration.
 """Running the stages twice with the same seed gives identical outputs.
 
-The real stage 05 takes about 5 minutes, so these tests run the real stage files on a REDUCED
+The real stage 05 takes about 18 minutes, so these tests run the real stage files on a REDUCED
 configuration: a small synthetic data set, 2 seeds, 2 epochs and a tiny LSTM. They never read the
 real data. Stage 01 is left out because it downloads; its inventory is built from the synthetic
 Parquet file instead.

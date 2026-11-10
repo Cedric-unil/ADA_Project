@@ -58,7 +58,9 @@ unsupervised:
   gmm_n_init: 5
 
 baseline:
-  c_grid: [0.01, 0.1, 1.0, 10.0]
+  # Inverse penalty strength C, tuned on pooled cross-validated macro-F1. Widened from
+  # [0.01, 0.1, 1.0, 10.0] by decision D (10 Nov 2026), because 10 was chosen at the edge.
+  c_grid: [0.01, 0.1, 1.0, 10.0, 30.0, 100.0]
   max_iter: 2000
 
 lstm:
@@ -75,8 +77,9 @@ lstm:
   learning_rate: 0.003
   # Each epoch shows the model one randomly placed window of every training cut. Each model
   # keeps the number of epochs, from 1 to max_epochs, with the best macro-F1 on its validation
-  # curve averaged over the seeds. In the pilot the best epoch was 26.
-  max_epochs: 40
+  # curve averaged over the seeds. Widened from 40 by decision D (10 Nov 2026), because the
+  # LSTM chose 38 of 40 epochs, at the edge of the range.
+  max_epochs: 80
   # CPU threads for each LSTM training. Fixed because the same seed gives different results on a
   # different number of threads, through rounding. A different CPU may still differ slightly.
   # A model this small gains little from more threads; running several trainings at once is faster.
@@ -87,8 +90,8 @@ lstm:
   n_jobs: 4
   # The LSTM and its shuffled control are trained on the same seeds: the seed at the top of this
   # file, then the next integers. The seed alone moved the best macro-F1 by 0.017, more than the
-  # gap being measured between the two models.
-  n_seeds: 5
+  # gap being measured between the two models. Raised from 5 to 10 by decision A (10 Nov 2026).
+  n_seeds: 10
 
 evaluation:
   # Keep false until hyperparameters are frozen. The test set is then used once.
@@ -102,7 +105,9 @@ evaluation:
   robustness_min_sample_rate: 16000
   # Test scores are reported with and without these species. All their test cuts are on tapes
   # 78018 and 77028, where other cuts (dropped in stage 02) also carried a second species label,
-  # so these tapes may hold both species and their labels are doubtful.
+  # so these tapes may hold both species and their labels are doubtful. The report with all
+  # species is the primary result; the one without them is a sensitivity check (decision C,
+  # fixed on 10 Nov 2026, before the test set was used).
   doubtful_species: [Bearded_Seal, Long-Finned_Pilot_Whale]
 
 sensitivity:

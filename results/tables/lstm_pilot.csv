@@ -7,6 +7,10 @@ Logistic regression (whole cuts),C = 1.0,0.38290338503104465,
 Logistic regression (windows),C = 1.0,0.39125640739941225,
 Logistic regression (whole cuts),C = 10.0,0.35045799091898383,
 Logistic regression (windows),C = 10.0,0.37596357425219584,
+Logistic regression (whole cuts),C = 30.0,0.3335345764714904,
+Logistic regression (windows),C = 30.0,0.36898309062410173,
+Logistic regression (whole cuts),C = 100.0,0.3265572379531902,
+Logistic regression (windows),C = 100.0,0.34467514369688285,
 "LSTM, last output","learning rate 0.001, 80 epochs",0.30098421759293575,41.0
 "LSTM, last output, shuffled frames","learning rate 0.001, 80 epochs",0.34473314503796887,66.0
 "LSTM, last output","learning rate 0.003, 50 epochs",0.317825311942959,50.0
